@@ -13,23 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package at.ac.tuwien.server;
+package at.ac.tuwien.server.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import at.ac.tuwien.server.Message;
+import at.ac.tuwien.server.dao.IUserDao;
+import at.ac.tuwien.server.domain.User;
+import at.ac.tuwien.server.service.IUserService;
+
 @Controller
 @RequestMapping("/*")
 public class RegisterController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
+	
+	@Autowired
+	IUserService userService;
 
+	
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -57,24 +69,42 @@ public class RegisterController {
 		return "XML message received! Your message: " + message.toString();
 	}
 	
-	
+	@Transactional
 	@RequestMapping(value="sendmessagemap", method=RequestMethod.POST)
 	public @ResponseBody String sendMessageMap(@RequestBody LinkedMultiValueMap<String, String> map) {
-		Message message = new Message();
+//		Message message = new Message();
+//		
+//		try {
+//			message.setId(Integer.parseInt(map.getFirst("id")));
+//		} catch (NumberFormatException e) {
+//			message.setId(0);
+//		}
+//		
+//		message.setSubject(map.getFirst("subject"));
+//		message.setText(map.getFirst("text"));
+//
+//		logger.info("Map message: " + message.toString());
+//		return "Map message received! Your message: " + message.toString();
 		
-		try {
-			message.setId(Integer.parseInt(map.getFirst("id")));
-		} catch (NumberFormatException e) {
-			message.setId(0);
+		//TODO check whether values are not null
+		logger.info("sendMessageMap method called");
+		User user = new User();
+		user.setUsername(map.getFirst("username"));
+		user.setPassword(map.getFirst("password"));
+		user.setEmail(map.getFirst("email"));
+
+		logger.info("New User object is created");
+		try{
+			
+			userService.createUser(user);
+			return "User registered Successfully!";
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+			return e.getMessage();
 		}
 		
-		message.setSubject(map.getFirst("subject"));
-		message.setText(map.getFirst("text"));
-
-		logger.info("Map message: " + message.toString());
-		return "Map message received! Your message: " + message.toString();
 	}
-	
+
 	
 }
 
