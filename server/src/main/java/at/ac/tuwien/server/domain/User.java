@@ -1,9 +1,15 @@
 package at.ac.tuwien.server.domain;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -35,11 +41,14 @@ public class User {
 	@Column(name = "score")
 	private Integer score;
 
+	private Date register_date;
+	private Date last_activity_date;
 	
-	//TODO
-	//validation
-	//list of friends
-	//connection to race
+	@OneToMany
+	private List<User> friends;
+	
+	@ManyToMany(mappedBy = "participants")
+	private Set<Race> races;
 	
 	
 	public Integer getId() {
@@ -80,6 +89,38 @@ public class User {
 
 	public void setScore(Integer score) {
 		this.score = score;
+	}
+
+	public Date getRegister_date() {
+		return register_date;
+	}
+
+	public void setRegister_date(Date register_date) {
+		this.register_date = register_date;
+	}
+
+	public Date getLast_activity_date() {
+		return last_activity_date;
+	}
+
+	public void setLast_activity_date(Date last_activity_date) {
+		this.last_activity_date = last_activity_date;
+	}
+
+	public List<User> getFirends() {
+		return friends;
+	}
+
+	public void setFirends(List<User> firends) {
+		this.friends = firends;
+	}
+
+	public Set<Race> getRaces() {
+		return races;
+	}
+
+	public void setRaces(Set<Race> races) {
+		this.races = races;
 	}
 	
 	
