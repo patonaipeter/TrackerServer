@@ -18,6 +18,7 @@ public class Location {
 	
 	private Long longitude;
 	private Long latitude;
+	private Long altitude;
 	
 	private Date timestamp;
 	
@@ -54,6 +55,12 @@ public class Location {
 	}
 	public void setRace(Race race) {
 		this.race = race;
+	}
+	public Long getAltitude() {
+		return altitude;
+	}
+	public void setAltitude(Long altitude) {
+		this.altitude = altitude;
 	}
 	
 	
