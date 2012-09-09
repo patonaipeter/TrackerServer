@@ -1,7 +1,5 @@
 package at.ac.tuwien.server.service;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import at.ac.tuwien.server.domain.User;
 
 public interface IUserService {
@@ -11,5 +9,7 @@ public interface IUserService {
 	 * @param user
 	 */
 	public void createUser(User user);
+	
+	public void getUser(String username, String pass);
 	
 }
