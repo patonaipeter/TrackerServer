@@ -10,6 +10,6 @@ public interface IUserService {
 	 */
 	public void createUser(User user);
 	
-	public void getUser(String username, String pass);
+	public User getUser(String username, String pass);
 	
 }

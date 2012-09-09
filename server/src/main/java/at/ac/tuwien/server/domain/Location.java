@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Location {
+public class Location implements Comparable<Location>{
 
 	@Id
 	@Column(name = "id")
@@ -63,7 +63,19 @@ public class Location {
 		this.altitude = altitude;
 	}
 	
-	
-	
+	@Override
+	public int compareTo(Location loc){
+		final int BEFORE = -1;
+		final int EQUAL = 0;
+		final int AFTER = 1;
+		
+		if(this.getTimestamp().equals(loc.getTimestamp())) {
+			return EQUAL;
+		}else if(loc.getTimestamp().after(this.getTimestamp())){
+			return AFTER;
+		}else{
+			return BEFORE;
+		}
+	}
 	
 }

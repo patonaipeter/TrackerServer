@@ -1,5 +1,7 @@
 package at.ac.tuwien.server.dao;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,7 +32,27 @@ public class UserDaoImpl implements IUserDao{
 		sessionFactory.getCurrentSession().save(user);
 		
 	}
+
 	
+	@Override
+	@Transactional
+	public User getUser(String username) {
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select u" +
+				" from User u" +
+				" where username = :username");
+		query.setParameter("username", username);
+
+		User user = null;
+		
+		try {
+			user = (User) query.uniqueResult(); // Returns null if not found
+		} catch (HibernateException e) { // If there are more than one results (conflicted usernames)
+			user = null;
+		}
+
+		return user;
+	}
 	
 	
 }

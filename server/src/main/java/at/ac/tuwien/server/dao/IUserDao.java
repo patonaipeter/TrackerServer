@@ -12,5 +12,8 @@ public interface IUserDao {
 	 */
 	@Transactional
 	void addUser(User User);
+
+	@Transactional
+	User getUser(String username);
 	
 }

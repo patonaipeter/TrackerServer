@@ -78,7 +78,7 @@ public class FileUploadController {
         for(FileSystemResource f : files){
         	File gpxFile = f.getFile();
         	//parse file and save it to db
-        	locationService.parseAndSaveGPX(gpxFile, userD);
+        	locationService.parseAndSaveGPX(gpxFile, userService.getUser(username, password));
         }
         
     	System.out.println("something received");
