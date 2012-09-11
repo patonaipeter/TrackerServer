@@ -1,11 +1,13 @@
 package at.ac.tuwien.server.service;
 
-import java.io.File;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import at.ac.tuwien.server.domain.User;
 
 public interface ILocationService {
 
-	public void parseAndSaveGPX(File f, User u);
+	@Transactional
+	public void parseAndSaveGPX(MultipartFile f, User u);
 	
 }

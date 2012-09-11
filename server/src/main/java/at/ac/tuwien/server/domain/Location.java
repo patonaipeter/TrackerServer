@@ -16,9 +16,9 @@ public class Location implements Comparable<Location>{
 	@GeneratedValue
 	private Integer id;
 	
-	private Long longitude;
-	private Long latitude;
-	private Long altitude;
+	private Double longitude;
+	private Double latitude;
+	private Double altitude;
 	
 	private Date timestamp;
 	
@@ -32,16 +32,16 @@ public class Location implements Comparable<Location>{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Long getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(Long longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-	public Long getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(Long latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 	public Date getTimestamp() {
@@ -56,10 +56,10 @@ public class Location implements Comparable<Location>{
 	public void setRace(Race race) {
 		this.race = race;
 	}
-	public Long getAltitude() {
+	public Double getAltitude() {
 		return altitude;
 	}
-	public void setAltitude(Long altitude) {
+	public void setAltitude(Double altitude) {
 		this.altitude = altitude;
 	}
 	

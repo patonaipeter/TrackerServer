@@ -15,20 +15,18 @@
  */
 package at.ac.tuwien.server.controller;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import at.ac.tuwien.server.service.ILocationService;
 import at.ac.tuwien.server.service.IUserService;
@@ -43,45 +41,22 @@ public class FileUploadController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
 	
-//    @RequestMapping(value = "sendLogFile", method=RequestMethod.POST, headers="Content-Type=multipart/form-data")
-//    public @ResponseBody String handleFormUpload(@RequestParam("description") String description, @RequestParam("file") MultipartFile file) {
-//
-//        if (!file.isEmpty()) {
-//        	byte[] bytes = null;
-//            try {
-//				bytes = file.getBytes();
-//			} catch (IOException e) {
-//				logger.info("error processing uploaded file", e);
-//			}
-//           return "file upload received! Name:[" + description + "] Size:[" + bytes.length + "]";
-//       } else {
-//    	   return "file upload failed!";
-//       }
-//    }
-    
-    @RequestMapping(value="sendLogFile", method=RequestMethod.POST)
-	public @ResponseBody String sendMessageMap(@RequestBody MultiValueMap<String, Object> map) {
 
-    	System.out.println("something received");
-    	
-    	int nrOfFiles = Integer.parseInt(map.getFirst("nrOfFiles").toString());
-        String username = map.getFirst("username").toString();
-        String password = map.getFirst("password").toString();
-        String fileType = map.getFirst("fileType").toString();
-        
-        List<FileSystemResource> files = new ArrayList<FileSystemResource>();
-        
-        for(int i = 1;i < nrOfFiles;i++ ){
-        	files.add((FileSystemResource) map.getFirst("file"+i));
-        }
-    	
-        for(FileSystemResource f : files){
-        	File gpxFile = f.getFile();
-        	//parse file and save it to db
-        	locationService.parseAndSaveGPX(gpxFile, userService.getUser(username, password));
-        }
-        
-    	System.out.println("something received");
+    @Transactional
+    @RequestMapping(value = "sendLogFile", method=RequestMethod.POST, headers="Content-Type=multipart/form-data")
+    public @ResponseBody String handleFormUpload(@RequestParam("description") String description, 
+    											 @RequestParam("username") String username,
+    											 @RequestParam("password") String password,
+    											 @RequestParam("file") MultipartFile file,
+    											 @RequestParam("fileName") String fileName) {
+    	if(fileName.contains("Race")){
+    		//do something different
+    	}else{
+    		
+    		locationService.parseAndSaveGPX(file, userService.getUser(username, password));
+    		
+    		
+    	}
     	return "success";
     }
 

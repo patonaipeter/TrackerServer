@@ -19,10 +19,13 @@ public class Race {
 	private Integer id;
 	
 	@Column(name = "avgSpeed")
-	private Long avgSpeed;
+	private Double avgSpeed;
 	
 	@Column(name = "distance")
-	private Long distance;
+	private Double distance;
+	
+	@Column(name = "overallElevation")
+	private Double overallElevation;
 
 	@OneToMany
 	private Set<Location> locations;
@@ -30,6 +33,7 @@ public class Race {
 	@ManyToMany
 	private List<User> participants;
 	
+	@Column(name = "raceName")
 	private String raceName;
 	
 	public String getRaceName() {
@@ -48,19 +52,19 @@ public class Race {
 		this.id = id;
 	}
 
-	public Long getAvgSpeed() {
+	public Double getAvgSpeed() {
 		return avgSpeed;
 	}
 
-	public void setAvgSpeed(Long avgSpeed) {
+	public void setAvgSpeed(Double avgSpeed) {
 		this.avgSpeed = avgSpeed;
 	}
 
-	public Long getDistance() {
+	public Double getDistance() {
 		return distance;
 	}
 
-	public void setDistance(Long distance) {
+	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
 
@@ -78,6 +82,14 @@ public class Race {
 
 	public void setParticipants(List<User> participants) {
 		this.participants = participants;
+	}
+
+	public Double getOverallElevation() {
+		return overallElevation;
+	}
+
+	public void setOverallElevation(Double overallElevation) {
+		this.overallElevation = overallElevation;
 	}
 	
 	

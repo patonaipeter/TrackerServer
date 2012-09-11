@@ -1,18 +1,21 @@
 package at.ac.tuwien.server.service;
 
-import java.io.File;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import at.ac.tuwien.server.Constants;
 import at.ac.tuwien.server.dao.ILocationDao;
 import at.ac.tuwien.server.dao.IRaceDao;
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Race;
 import at.ac.tuwien.server.domain.User;
+import at.ac.tuwien.server.service.stats.StatisticsHelper;
+import at.ac.tuwien.server.utils.GpxParser;
 
 @Service("LocationService")
 public class LocationService implements ILocationService {
@@ -24,30 +27,38 @@ public class LocationService implements ILocationService {
 
 	
 	@Override
-	public void parseAndSaveGPX(File f, User u) {
+	@Transactional
+	public void parseAndSaveGPX(MultipartFile f, User u) {
 		//Parse GPX file
-		
-		//create locations
-		Location loc = new Location();
-		loc.setLatitude(new Long(1));
-		loc.setLongitude(new Long(2));
-		
-		//retrieve user's default race
-		Race defaultLoggingRace = null;
-		for(Race r : u.getRaces()){
-			if(r.getRaceName().equals(Constants.defaultRace)){
-				defaultLoggingRace = r;
-				break;
+		//parse locations
+		Set<Location> locations;
+		try {
+			ByteArrayInputStream bis = new ByteArrayInputStream(f.getBytes());
+			
+			locations = GpxParser.readTrack(bis);
+			Race defaultLoggingRace = raceDao.getDefaultRaceForUser(u);
+			
+			//set default track for each
+			for(Location l : locations){
+				l.setRace(defaultLoggingRace);
 			}
+			locationDao.saveLocations(locations);
+			//add
+			defaultLoggingRace.setLocations(locations);
+			
+			//update race statistics (distance elevation avgspeed)
+			//TODO test this shit
+			defaultLoggingRace = StatisticsHelper.updateRaceStats(defaultLoggingRace, 
+											 locations,
+											 locationDao.getLastLocation(defaultLoggingRace),
+											 locationDao.getFirstLocation(defaultLoggingRace));
+			
+			raceDao.saveRace(defaultLoggingRace);
+
+
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		
-		//add locationst to a list
-		Set<Location> locations = new TreeSet<Location>();
-		locations.add(loc);
-		
-		//add
-		defaultLoggingRace.setLocations(locations);
-		
 	}
 
 }

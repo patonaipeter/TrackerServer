@@ -32,7 +32,6 @@ public class UserService implements IUserService {
 		userDao.addUser(user);
 		
 		//initiate default race (the race to that we store baseic logging infos)
-		//TODO test this
 		Race race = new Race();
 		List<User> userList = new ArrayList<User>();
 		userList.add(user);
