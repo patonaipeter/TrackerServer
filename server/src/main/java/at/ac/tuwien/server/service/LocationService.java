@@ -47,7 +47,6 @@ public class LocationService implements ILocationService {
 			defaultLoggingRace.setLocations(locations);
 			
 			//update race statistics (distance elevation avgspeed)
-			//TODO test this shit
 			defaultLoggingRace = StatisticsHelper.updateRaceStats(defaultLoggingRace, 
 											 locations,
 											 locationDao.getLastLocation(defaultLoggingRace),

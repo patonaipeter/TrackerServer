@@ -40,9 +40,9 @@ public class StatisticsHelper {
 		long timeIntervallInMillis = 0;
 		Location[] locs = updatedLocations.toArray(new Location[updatedLocations.size()]);
 		if(firstDBlocation == null){
-			timeIntervallInMillis = locs[locs.length].getTimestamp().getTime() - locs[0].getTimestamp().getTime();
+			timeIntervallInMillis = locs[locs.length-1].getTimestamp().getTime() - locs[0].getTimestamp().getTime();
 		}else{
-			timeIntervallInMillis = locs[locs.length].getTimestamp().getTime()-firstDBlocation.getTimestamp().getTime();
+			timeIntervallInMillis = locs[locs.length-1].getTimestamp().getTime()-firstDBlocation.getTimestamp().getTime();
 		}
 		//km/h
 		race.setAvgSpeed(new Double(race.getDistance()/(timeIntervallInMillis/(1000*60*60))));

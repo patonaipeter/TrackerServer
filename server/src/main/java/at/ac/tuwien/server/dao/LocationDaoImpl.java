@@ -29,13 +29,12 @@ public class LocationDaoImpl implements ILocationDao {
 		}
 		
 	}
-	//TODO test this
 	@Transactional
 	public Location getLastLocation(Race defaultLoggingRace) {
 		
 		if(defaultLoggingRace.getId() == null) return null;
 		
-		Query q = sessionFactory.getCurrentSession().createQuery("select l from Location l where race_id =:raceid order by l.timestamp");
+		Query q = sessionFactory.getCurrentSession().createQuery("select l from Location l where l.race.id =:raceid order by l.timestamp desc");
 		q.setParameter("raceid", defaultLoggingRace.getId());
 		q.setMaxResults(1);
 		return (Location) q.uniqueResult();
@@ -46,7 +45,7 @@ public class LocationDaoImpl implements ILocationDao {
 		
 		if(defaultLoggingRace.getId() == null) return null;
 		
-		Query q = sessionFactory.getCurrentSession().createQuery("select l from Location l where race_id =:raceid order by l.timestamp asc");
+		Query q = sessionFactory.getCurrentSession().createQuery("select l from Location l where l.race.id =:raceid order by l.timestamp asc");
 		q.setParameter("raceid", defaultLoggingRace.getId());
 		q.setMaxResults(1);
 		return (Location) q.uniqueResult();
