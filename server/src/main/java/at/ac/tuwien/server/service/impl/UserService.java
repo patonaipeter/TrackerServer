@@ -74,11 +74,13 @@ public class UserService implements IUserService {
 		stat.setElevation(race.getOverallElevation());
 		stat.setName(race.getRaceName());
 		
-		raceDao.getNumberOfRaces(u);
-		raceDao.getDistanceInRaces(u);
-		raceService.getAvgSpeedInRaces(u);
+		stat.setNumberOfRaces(raceDao.getNumberOfRaces(u));
+		stat.setDistanceInRaceMode(raceDao.getDistanceInRaces(u));
+		stat.setAvgSpeedInRaceMode(raceService.getAvgSpeedInRaces(u));
 		
-		return null;
+		//TODO racewin
+		stat.setRaceWins(new Integer(0));
+		return stat;
 	}
 
 	
