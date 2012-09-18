@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import at.ac.tuwien.server.service.ILocationService;
-import at.ac.tuwien.server.service.IUserService;
+import at.ac.tuwien.server.service.interfaces.ILocationService;
+import at.ac.tuwien.server.service.interfaces.IUserService;
 
 @Controller
 public class FileUploadController {

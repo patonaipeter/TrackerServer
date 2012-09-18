@@ -1,8 +1,9 @@
-package at.ac.tuwien.server.service;
+package at.ac.tuwien.server.service.interfaces;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import at.ac.tuwien.server.domain.User;
+import at.ac.tuwien.server.domain.dtos.StatisticsDTO;
 
 public interface IUserService {
 
@@ -15,5 +16,8 @@ public interface IUserService {
 	
 	@Transactional
 	public User getUser(String username, String pass);
+
+	@Transactional
+	public StatisticsDTO getStatisticsForUser(User u);
 	
 }

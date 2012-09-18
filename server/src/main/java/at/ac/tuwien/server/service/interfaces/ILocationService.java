@@ -1,4 +1,4 @@
-package at.ac.tuwien.server.service;
+package at.ac.tuwien.server.service.interfaces;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,4 +1,4 @@
-package at.ac.tuwien.server.service;
+package at.ac.tuwien.server.service.impl;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -14,6 +14,7 @@ import at.ac.tuwien.server.dao.IRaceDao;
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Race;
 import at.ac.tuwien.server.domain.User;
+import at.ac.tuwien.server.service.interfaces.ILocationService;
 import at.ac.tuwien.server.service.stats.StatisticsHelper;
 import at.ac.tuwien.server.utils.GpxParser;
 

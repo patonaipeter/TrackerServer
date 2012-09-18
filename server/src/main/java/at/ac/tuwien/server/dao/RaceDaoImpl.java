@@ -1,5 +1,7 @@
 package at.ac.tuwien.server.dao;
 
+import java.util.Set;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import at.ac.tuwien.server.Constants;
 import at.ac.tuwien.server.domain.Race;
 import at.ac.tuwien.server.domain.User;
+import at.ac.tuwien.server.service.stats.StatisticsHelper;
 
 @Repository
 public class RaceDaoImpl implements IRaceDao {
@@ -29,5 +32,17 @@ public class RaceDaoImpl implements IRaceDao {
 		}
 		return null;
 	}
+	
+	@Override
+	@Transactional
+	public Integer getNumberOfRaces(User u) {
+		return new Integer(u.getRaces().size()-1);
+	}
+	@Override
+	@Transactional
+	public Double getDistanceInRaces(User u) {
+		return StatisticsHelper.getDistanceInRaces(u.getRaces());
+	}
+	
 
 }

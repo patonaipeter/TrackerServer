@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import at.ac.tuwien.server.Message;
 import at.ac.tuwien.server.dao.IUserDao;
 import at.ac.tuwien.server.domain.User;
-import at.ac.tuwien.server.service.IUserService;
+import at.ac.tuwien.server.service.interfaces.IUserService;
 
 @Controller
 @RequestMapping("/*")
@@ -40,14 +40,12 @@ public class RegisterController {
 	@Autowired
 	IUserService userService;
 
-	
-	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String home() {
-		logger.info("Spring Android Showcase");
+		logger.info("Backend Services For Tracker");
 		return "home";
 	}
 	
@@ -72,20 +70,7 @@ public class RegisterController {
 	@Transactional
 	@RequestMapping(value="sendmessagemap", method=RequestMethod.POST)
 	public @ResponseBody String sendMessageMap(@RequestBody LinkedMultiValueMap<String, String> map) {
-//		Message message = new Message();
-//		
-//		try {
-//			message.setId(Integer.parseInt(map.getFirst("id")));
-//		} catch (NumberFormatException e) {
-//			message.setId(0);
-//		}
-//		
-//		message.setSubject(map.getFirst("subject"));
-//		message.setText(map.getFirst("text"));
-//
-//		logger.info("Map message: " + message.toString());
-//		return "Map message received! Your message: " + message.toString();
-		
+
 		//TODO check whether values are not null
 		logger.info("sendMessageMap method called");
 		User user = new User();

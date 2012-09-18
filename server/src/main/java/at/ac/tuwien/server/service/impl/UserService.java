@@ -1,4 +1,4 @@
-package at.ac.tuwien.server.service;
+package at.ac.tuwien.server.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,6 +13,9 @@ import at.ac.tuwien.server.dao.IRaceDao;
 import at.ac.tuwien.server.dao.IUserDao;
 import at.ac.tuwien.server.domain.Race;
 import at.ac.tuwien.server.domain.User;
+import at.ac.tuwien.server.domain.dtos.StatisticsDTO;
+import at.ac.tuwien.server.service.interfaces.IRaceService;
+import at.ac.tuwien.server.service.interfaces.IUserService;
 
 @Service("userService")
 public class UserService implements IUserService {
@@ -23,6 +26,10 @@ public class UserService implements IUserService {
 	
 	@Autowired
 	IRaceDao raceDao;
+	
+	@Autowired
+	IRaceService raceService;
+	
 	
 	@Override
 	@Transactional
@@ -54,6 +61,24 @@ public class UserService implements IUserService {
 		}
 
 		
+	}
+
+	@Override
+	@Transactional
+	public StatisticsDTO getStatisticsForUser(User u) {
+		StatisticsDTO stat = new StatisticsDTO();
+		Race race = raceDao.getDefaultRaceForUser(u);
+		
+		stat.setAvgSpeed(race.getAvgSpeed());
+		stat.setDistance(race.getDistance());
+		stat.setElevation(race.getOverallElevation());
+		stat.setName(race.getRaceName());
+		
+		raceDao.getNumberOfRaces(u);
+		raceDao.getDistanceInRaces(u);
+		raceService.getAvgSpeedInRaces(u);
+		
+		return null;
 	}
 
 	

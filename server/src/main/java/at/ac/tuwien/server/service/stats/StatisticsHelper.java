@@ -2,6 +2,7 @@ package at.ac.tuwien.server.service.stats;
 
 import java.util.Set;
 
+import at.ac.tuwien.server.Constants;
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Race;
 
@@ -89,5 +90,19 @@ public class StatisticsHelper {
 
 	    return d;
 	}
+
+	public static Double getDistanceInRaces(Set<Race> races) {
+		Double sum = new Double(0);
+		
+		for(Race r : races){
+			if(!r.getRaceName().equals(Constants.defaultRace))
+			sum += r.getDistance();
+		}
+		
+		return sum;
+		
+	}
+
+
 	
 }
