@@ -1,5 +1,7 @@
 package at.ac.tuwien.server.dao;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -52,6 +54,20 @@ public class UserDaoImpl implements IUserDao{
 		}
 
 		return user;
+	}
+
+
+	@Override
+	public List<User> retrieveAllUsers() {
+		List<User> list = (List<User>) sessionFactory.getCurrentSession().createCriteria(User.class).list();
+		return list;
+	}
+
+
+	@Override
+	@Transactional
+	public User getUserById(Integer id) {
+		return (User) sessionFactory.getCurrentSession().get(User.class, id);
 	}
 	
 	

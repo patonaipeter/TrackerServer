@@ -15,6 +15,10 @@ public interface IRaceDao {
 	public Integer getNumberOfRaces(User u);
 	@Transactional
 	public Double getDistanceInRaces(User u);
+	@Transactional
+	public Race getRaceById(Integer id);
+	@Transactional
+	public Race saveNewRace(String raceName);
 
 	
 }

@@ -1,5 +1,6 @@
 package at.ac.tuwien.server.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -123,6 +124,15 @@ public class User {
 		this.races = races;
 	}
 	
+	public void addFriend(User u){
+		if(this.getFirends() != null){
+			this.getFirends().add(u);
+		}else{
+			List<User> liste = new ArrayList<User>();
+			liste.add(u);
+			this.setFirends(liste);
+		}
+	}
 	
 	
 }

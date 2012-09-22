@@ -1,7 +1,9 @@
 package at.ac.tuwien.server.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -91,7 +93,25 @@ public class Race {
 	public void setOverallElevation(Double overallElevation) {
 		this.overallElevation = overallElevation;
 	}
-	
+	public void addParticipant(User u){
+		if(this.getParticipants() != null){
+			this.getParticipants().add(u);
+		}else{
+			List<User> liste = new ArrayList<User>();
+			liste.add(u);
+			this.setParticipants(liste);
+		}
+	}
+
+	public void addLocation(Location loc) {
+		if(this.getLocations() != null){
+			this.getLocations().add(loc);
+		}else{
+			Set<Location> locs = new TreeSet<Location>();
+			locs.add(loc);
+			this.setLocations(locs);
+		}
+	}
 	
 	
 }

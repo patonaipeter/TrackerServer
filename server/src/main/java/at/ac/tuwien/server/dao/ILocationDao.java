@@ -1,11 +1,13 @@
 package at.ac.tuwien.server.dao;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Race;
+import at.ac.tuwien.server.domain.User;
 
 public interface ILocationDao {
 
@@ -20,5 +22,15 @@ public interface ILocationDao {
 	
 	@Transactional
 	public Location getFirstLocation(Race defaultLoggingRace);
+	
+	@Transactional
+	public List<User> getNearUsers(Double longitude, Double latitude, Double radius,
+			Long timeinterval);
+
+	@Transactional
+	public Location getLastPositionOfUser(User u);
+
+	@Transactional
+	public Location getUserLocationForDate(User u, Long time);
 		
 }

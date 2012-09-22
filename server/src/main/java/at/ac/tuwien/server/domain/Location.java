@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -21,6 +22,8 @@ public class Location implements Comparable<Location>{
 	private Double altitude;
 	
 	private Date timestamp;
+	@ManyToOne
+	private User user;
 	
 	@OneToOne
 	private Race race;
@@ -76,6 +79,12 @@ public class Location implements Comparable<Location>{
 		}else{
 			return BEFORE;
 		}
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }

@@ -42,6 +42,7 @@ public class LocationService implements ILocationService {
 			//set default track for each
 			for(Location l : locations){
 				l.setRace(defaultLoggingRace);
+				l.setUser(u);
 			}
 			locationDao.saveLocations(locations);
 			//add

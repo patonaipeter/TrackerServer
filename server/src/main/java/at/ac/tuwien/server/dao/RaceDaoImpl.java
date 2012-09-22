@@ -43,6 +43,21 @@ public class RaceDaoImpl implements IRaceDao {
 	public Double getDistanceInRaces(User u) {
 		return StatisticsHelper.getDistanceInRaces(u.getRaces());
 	}
+	@Override
+	@Transactional
+	public Race getRaceById(Integer id) {
+		Race race = (Race) sessionFactory.getCurrentSession().get(Race.class, id);
+		return race;
+	}
+	@Override
+	@Transactional
+	public Race saveNewRace(String name) {
+		Race race = new Race();
+		race.setRaceName(name);
+		sessionFactory.getCurrentSession().saveOrUpdate(race);
+		sessionFactory.getCurrentSession().flush();
+		return race;
+	}
 	
 
 }
