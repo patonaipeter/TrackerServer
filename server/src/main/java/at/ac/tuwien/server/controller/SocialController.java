@@ -55,7 +55,7 @@ public class SocialController {
 	IRaceService raceService;
 	
 	@Transactional
-	@RequestMapping(value="listusers", method=RequestMethod.POST)
+	@RequestMapping(value="listusers", method=RequestMethod.POST, headers="Accept=application/xml")
 	public @ResponseBody UserListDTO listUsers() {
 		
 		List<User> users = userService.retrieveAllUsers();
@@ -80,7 +80,7 @@ public class SocialController {
 	}
 	
 	@Transactional
-	@RequestMapping(value="listfriends", method=RequestMethod.POST)
+	@RequestMapping(value="listfriends", method=RequestMethod.POST, headers="Accept=application/xml")
 	public @ResponseBody UserListDTO listFriends(@RequestBody LinkedMultiValueMap<String, String> requestData) {
 
 		String username = requestData.getFirst("username");
@@ -108,7 +108,7 @@ public class SocialController {
 	}
 	
 	@Transactional
-	@RequestMapping(value="listnearusers", method=RequestMethod.POST)
+	@RequestMapping(value="listnearusers", method=RequestMethod.POST, headers="Accept=application/xml")
 	public @ResponseBody UserListDTO listNearUsers(@RequestBody LinkedMultiValueMap<String, String> requestData) {
 		
 		String username = requestData.getFirst("username");
@@ -147,7 +147,7 @@ public class SocialController {
 	}
 	
 	@Transactional
-	@RequestMapping(value="listmessages", method=RequestMethod.POST)
+	@RequestMapping(value="listmessages", method=RequestMethod.POST, headers="Accept=application/xml")
 	public @ResponseBody MsgListDTO listMessages(@RequestBody LinkedMultiValueMap<String, String> requestData) {
 		
 		String username = requestData.getFirst("username");
@@ -175,7 +175,7 @@ public class SocialController {
 	}
 	
 	@Transactional
-	@RequestMapping(value="listfriendrequests", method=RequestMethod.POST)
+	@RequestMapping(value="listfriendrequests", method=RequestMethod.POST, headers="Accept=application/xml")
 	public @ResponseBody MsgListDTO listFriendRequests(@RequestBody LinkedMultiValueMap<String, String> requestData) {
 		
 		String username = requestData.getFirst("username");
@@ -248,7 +248,7 @@ public class SocialController {
 	}
 	
 	@Transactional
-	@RequestMapping(value="listraces", method=RequestMethod.POST)
+	@RequestMapping(value="listraces", method=RequestMethod.POST, headers="Accept=application/xml")
 	public @ResponseBody RaceListDTO listRaces(@RequestBody LinkedMultiValueMap<String, String> requestData) {
 		
 		String username = requestData.getFirst("username");
@@ -275,7 +275,7 @@ public class SocialController {
 	}
 	
 	@Transactional
-	@RequestMapping(value="listjoinableraces", method=RequestMethod.POST)
+	@RequestMapping(value="listjoinableraces", method=RequestMethod.POST, headers="Accept=application/xml")
 	public @ResponseBody RaceListDTO listjoinableRaces(@RequestBody LinkedMultiValueMap<String, String> requestData) {
 		
 		String username = requestData.getFirst("username");
