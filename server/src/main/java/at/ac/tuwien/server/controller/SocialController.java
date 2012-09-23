@@ -15,6 +15,8 @@
  */
 package at.ac.tuwien.server.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -56,7 +58,7 @@ public class SocialController {
 	
 	@Transactional
 	@RequestMapping(value="listusers", method=RequestMethod.POST, headers="Accept=application/xml")
-	public @ResponseBody UserListDTO listUsers() {
+	public @ResponseBody UserListDTO listUsers(@RequestBody LinkedMultiValueMap<String, String> requestData) {
 		
 		List<User> users = userService.retrieveAllUsers();
 		
@@ -65,9 +67,9 @@ public class SocialController {
 			UserDTO dto = new UserDTO();
 			dto.setEmail(u.getEmail());
 			dto.setId(u.getId());
-			dto.setLast_activity_date(u.getLast_activity_date());
+			dto.setLast_activity_date(u.getLast_activity_date().getTime());
 			dto.setNumOfFriends(u.getFirends().size());
-			dto.setRegister_date(u.getRegister_date());
+			dto.setRegister_date(u.getRegister_date().getTime());
 			dto.setScore(u.getScore());
 			dto.setUsername(u.getUsername());
 			
@@ -94,9 +96,9 @@ public class SocialController {
 			UserDTO dto = new UserDTO();
 			dto.setEmail(u.getEmail());
 			dto.setId(u.getId());
-			dto.setLast_activity_date(u.getLast_activity_date());
+			dto.setLast_activity_date(u.getLast_activity_date().getTime());
 			dto.setNumOfFriends(u.getFirends().size());
-			dto.setRegister_date(u.getRegister_date());
+			dto.setRegister_date(u.getRegister_date().getTime());
 			dto.setScore(u.getScore());
 			dto.setUsername(u.getUsername());
 			
@@ -132,9 +134,9 @@ public class SocialController {
 			
 			dto.setEmail(u.getEmail());
 			dto.setId(u.getId());
-			dto.setLast_activity_date(u.getLast_activity_date());
+			dto.setLast_activity_date(u.getLast_activity_date().getTime());
 			dto.setNumOfFriends(u.getFirends().size());
-			dto.setRegister_date(u.getRegister_date());
+			dto.setRegister_date(u.getRegister_date().getTime());
 			dto.setScore(u.getScore());
 			dto.setUsername(u.getUsername());
 			
@@ -162,7 +164,7 @@ public class SocialController {
 			
 			dto.setId(m.getId());
 			dto.setSender(m.getSender().getUsername());
-			dto.setSentDate(m.getSentDate());
+			dto.setSentDate(m.getSentDate().getTime());
 			dto.setText(m.getMsgText());
 			
 			dtos.add(dto);
@@ -190,7 +192,7 @@ public class SocialController {
 			
 			dto.setId(m.getId());
 			dto.setSender(m.getSender().getUsername());
-			dto.setSentDate(m.getSentDate());
+			dto.setSentDate(m.getSentDate().getTime());
 			dto.setText(m.getMsgText());
 			
 			dtos.add(dto);

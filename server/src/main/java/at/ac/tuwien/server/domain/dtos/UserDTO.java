@@ -1,7 +1,5 @@
 package at.ac.tuwien.server.domain.dtos;
 
-import java.util.Date;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="userdto")
@@ -16,8 +14,8 @@ public class UserDTO {
 	
 	private Integer score;
 
-	private Date register_date;
-	private Date last_activity_date;
+	private Long register_date;
+	private Long last_activity_date;
 	
 	private Integer numOfFriends;
 	
@@ -59,19 +57,19 @@ public class UserDTO {
 		this.score = score;
 	}
 
-	public Date getRegister_date() {
+	public Long getRegister_date() {
 		return register_date;
 	}
 
-	public void setRegister_date(Date register_date) {
+	public void setRegister_date(Long register_date) {
 		this.register_date = register_date;
 	}
 
-	public Date getLast_activity_date() {
+	public Long getLast_activity_date() {
 		return last_activity_date;
 	}
 
-	public void setLast_activity_date(Date last_activity_date) {
+	public void setLast_activity_date(Long last_activity_date) {
 		this.last_activity_date = last_activity_date;
 	}
 

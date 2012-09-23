@@ -1,7 +1,5 @@
 package at.ac.tuwien.server.domain.dtos;
 
-import java.util.Date;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="msgdto")
@@ -11,7 +9,7 @@ public class MsgDTO {
 	private String text;
 	private String sender;
 	private Integer senderId;
-	private Date sentDate;
+	private Long sentDate;
 	public Integer getId() {
 		return id;
 	}
@@ -36,10 +34,10 @@ public class MsgDTO {
 	public void setSenderId(Integer senderId) {
 		this.senderId = senderId;
 	}
-	public Date getSentDate() {
+	public Long getSentDate() {
 		return sentDate;
 	}
-	public void setSentDate(Date sentDate) {
+	public void setSentDate(Long sentDate) {
 		this.sentDate = sentDate;
 	}
 	

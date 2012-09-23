@@ -1,7 +1,5 @@
 package at.ac.tuwien.server.domain.dtos;
 
-import java.util.Date;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="racedto")
@@ -9,7 +7,7 @@ public class RaceDTO {
 
 	private Integer id;
 	private String name;
-	private Date date;
+	private Long date;
 	private Double length;
 	public Integer getId() {
 		return id;
@@ -23,10 +21,10 @@ public class RaceDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getDate() {
+	public Long getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(Long date) {
 		this.date = date;
 	}
 	public Double getLength() {

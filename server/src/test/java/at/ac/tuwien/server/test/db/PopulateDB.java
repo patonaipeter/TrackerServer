@@ -32,13 +32,26 @@ public class PopulateDB {
 	@Rollback(false)
 	public void fillDB(){
 		
+		
+		this.createTestUser("admin","admin","admin");
+		this.createTestUser("peter","admin","peter@patonai.at");
+		this.createTestUser("androiduser","admin","peter@android.at");
+		this.createTestUser("test","test","test@test.at");
+		this.createTestUser("chalkidiki","admin","chalkidiki@patonai.gr");
+		this.createTestUser("samos","admin","samos@patonai.gr");
+		this.createTestUser("ikarios","admin","ikarios@patonai.gr");
+	
+	}
+
+	private void createTestUser(String user, String pass, String email) {
+		
 		User u = new User();
-		u.setEmail("admin@admin.com");
+		u.setEmail(email);
 		u.setLast_activity_date(new Date());
-		u.setPassword("admin");
+		u.setPassword(pass);
 		u.setRegister_date(new Date());
 		u.setScore(10);
-		u.setUsername("admin");
+		u.setUsername(user);
 		
 		userDao.addUser(u);
 		
@@ -49,7 +62,7 @@ public class PopulateDB {
 		
 		race.setRaceName(Constants.defaultRace);
 		raceDao.saveRace(race);
-	
+		
 	}
 	
 	
