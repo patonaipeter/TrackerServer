@@ -17,6 +17,7 @@ import at.ac.tuwien.server.dao.IRaceDao;
 import at.ac.tuwien.server.dao.IUserDao;
 import at.ac.tuwien.server.domain.Race;
 import at.ac.tuwien.server.domain.User;
+import at.ac.tuwien.server.service.interfaces.IUserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:root-context-test.xml")
@@ -26,6 +27,9 @@ public class PopulateDB {
 	IUserDao userDao;
 	@Autowired
 	IRaceDao raceDao;
+	
+	@Autowired
+	IUserService userService;
 	
 	@Test
 	@Transactional
@@ -40,7 +44,11 @@ public class PopulateDB {
 		this.createTestUser("chalkidiki","admin","chalkidiki@patonai.gr");
 		this.createTestUser("samos","admin","samos@patonai.gr");
 		this.createTestUser("ikarios","admin","ikarios@patonai.gr");
+		
+		User user1 = userService.getUser("peter", "admin");
+		User user2 = userService.getUser("admin", "admin");
 	
+		userService.sendFriendRequest(user1, user2);
 	}
 
 	private void createTestUser(String user, String pass, String email) {

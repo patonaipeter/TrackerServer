@@ -192,6 +192,7 @@ public class SocialController {
 			
 			dto.setId(m.getId());
 			dto.setSender(m.getSender().getUsername());
+			dto.setSenderId(m.getSender().getId());
 			dto.setSentDate(m.getSentDate().getTime());
 			dto.setText(m.getMsgText());
 			
@@ -235,7 +236,7 @@ public class SocialController {
 		User friend = msg.getSender();
 		
 		userService.addFriend(user,friend);
-		
+		userService.deleteMsgById(msg.getId());
 		return "success";
 	}
 	

@@ -8,6 +8,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class MsgListDTO {
 
 	private List<MsgDTO> msgList;
+	public MsgListDTO() {
+		
+	}
+
+	public MsgListDTO(List<MsgDTO> msgList) {
+		super();
+		this.msgList = msgList;
+	}
+
 
 	@XmlElement(name="msgdto")
 	public List<MsgDTO> getMsgList() {
