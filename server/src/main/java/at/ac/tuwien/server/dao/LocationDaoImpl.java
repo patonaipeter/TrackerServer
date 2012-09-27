@@ -58,9 +58,9 @@ public class LocationDaoImpl implements ILocationDao {
 	@Transactional
 	public List<User> getNearUsers(Double longitude, Double latitude, Double radius, Long timeinterval) {
 		
-		Query q = sessionFactory.getCurrentSession().createQuery("select u from User u JOIN u.races r JOIN r.locations loc where loc.timestamp > :mintime AND" +
-				" loc.timestamp < :maxtime AND loc.longitude > :minlongitude AND loc.longitude < :maxlangitude AND" +
-				" loc.latitude > :minlangitude AND loc.latitude < :maxlatitude");
+		Query q = sessionFactory.getCurrentSession().createQuery("select loc.user from Location loc where loc.timestamp > :mintime AND" +
+				" loc.timestamp < :maxtime AND loc.longitude > :minlongitude AND loc.longitude < :maxlongitude AND" +
+				" loc.latitude > :minlatitude AND loc.latitude < :maxlatitude");
 		
 		
 		q.setParameter("mintime", new Date(new Date().getTime() - timeinterval/2));
