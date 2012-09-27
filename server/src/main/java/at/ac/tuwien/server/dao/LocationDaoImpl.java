@@ -58,9 +58,9 @@ public class LocationDaoImpl implements ILocationDao {
 	@Transactional
 	public List<User> getNearUsers(Double longitude, Double latitude, Double radius, Long timeinterval) {
 		
-		Query q = sessionFactory.getCurrentSession().createQuery("select u from User u JOIN u.races r JOIN r.locations loc where loc.timestamp < :mintime AND" +
-				"loc.timestamp > :maxtime AND loc.longitude > :minlongitude AND loc.longitude < :maxlangitude AND" +
-				"loc.latitude > :minlangitude AND loc.latitude < :maxlatitude");
+		Query q = sessionFactory.getCurrentSession().createQuery("select u from User u JOIN u.races r JOIN r.locations loc where loc.timestamp > :mintime AND" +
+				" loc.timestamp < :maxtime AND loc.longitude > :minlongitude AND loc.longitude < :maxlangitude AND" +
+				" loc.latitude > :minlangitude AND loc.latitude < :maxlatitude");
 		
 		
 		q.setParameter("mintime", new Date(new Date().getTime() - timeinterval/2));
@@ -86,18 +86,23 @@ public class LocationDaoImpl implements ILocationDao {
 	@Transactional
 	public Location getUserLocationForDate(User u, Long time) {
 		
-		Query q = sessionFactory.getCurrentSession().createQuery("select loc from User u JOIN u.races r JOIN r.locations loc where loc.timestamp < :mintime AND" +
-				"loc.timestamp > :maxtime AND u.id = :userid");
+		Query q = sessionFactory.getCurrentSession().createQuery("select loc from Location loc where loc.timestamp > :mintime AND" +
+				" loc.timestamp < :maxtime AND loc.user.id = :userid");
 		Date referenceDate = new Date(time);
-		//15 min
-		long timeinterval = 1000*60*15;
+		//30 min
+		long timeinterval = 1000*60*30;
 		q.setParameter("mintime", new Date(referenceDate.getTime() - timeinterval/2));
 		q.setParameter("maxtime", new Date(referenceDate.getTime() + timeinterval/2));
 		q.setParameter("userid", u.getId());
 		
-		Location l = (Location) q.list().get(0);
-		
-		return l;
+		if(!q.list().isEmpty()){
+			//TODO if more result give the one in the middle of the range back
+			Location l = (Location) q.list().get(0);
+			return l;
+		}else{
+			return null;
+		}
+			
 	}
 
 }

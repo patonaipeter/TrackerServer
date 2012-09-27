@@ -333,6 +333,9 @@ public class SocialController {
 		Location loc = userService.getUserLocationForDate(u,time);
 		
 		//longitude,latitude
+		if(loc == null){
+			return "error";
+		}
 		return ""+loc.getLongitude()+","+loc.getLatitude();
 	}
 	

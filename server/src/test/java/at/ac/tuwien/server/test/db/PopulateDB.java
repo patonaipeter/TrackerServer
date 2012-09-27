@@ -13,8 +13,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import at.ac.tuwien.server.Constants;
+import at.ac.tuwien.server.dao.ILocationDao;
 import at.ac.tuwien.server.dao.IRaceDao;
 import at.ac.tuwien.server.dao.IUserDao;
+import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Race;
 import at.ac.tuwien.server.domain.User;
 import at.ac.tuwien.server.service.interfaces.IUserService;
@@ -27,6 +29,8 @@ public class PopulateDB {
 	IUserDao userDao;
 	@Autowired
 	IRaceDao raceDao;
+	@Autowired
+	ILocationDao locationDao;
 	
 	@Autowired
 	IUserService userService;
@@ -49,6 +53,27 @@ public class PopulateDB {
 		User user2 = userService.getUser("admin", "admin");
 	
 		userService.sendFriendRequest(user1, user2);
+		
+		
+	}
+	
+	@Test
+	@Transactional
+	@Rollback(false)
+	public void fillDb2(){
+		//this needs another transaction (race must be saved before)
+		User user2 = userService.getUser("admin", "admin");
+		this.addLocationToUser(48.2,16.3,user2);
+	}
+
+	private void addLocationToUser(double d, double e, User user2) {
+		Location loc = new Location();
+		loc.setLatitude(e);
+		loc.setLongitude(d);
+		loc.setUser(user2);
+		loc.setRace(raceDao.getDefaultRaceForUser(user2));
+		loc.setTimestamp(new Date());
+		locationDao.saveLocation(loc);
 	}
 
 	private void createTestUser(String user, String pass, String email) {
