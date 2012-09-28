@@ -76,7 +76,7 @@ public class LocationDaoImpl implements ILocationDao {
 	@Override
 	@Transactional
 	public Location getLastPositionOfUser(User u) {
-		Query q = sessionFactory.getCurrentSession().createQuery("SELECT l FROM User u JOIN u.races r JOIN r.locations l WHERE u.id = :userid ORDER BY l.timestamp desc");
+		Query q = sessionFactory.getCurrentSession().createQuery("SELECT l FROM Location l WHERE l.user.id = :userid ORDER BY l.timestamp desc");
 		q.setParameter("userid", u.getId());
 		q.setMaxResults(1);
 		Location loc = (Location) q.uniqueResult();

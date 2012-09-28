@@ -72,13 +72,13 @@ public class PopulateDB {
 	@Rollback(false)
 	public void fillDb3(){
 		User user1 = userService.getUser("peter", "admin");
-		this.addLocationToUser(48.200002,16.3,user1);
+		this.addLocationToUser(48.29,16.25,user1);
 		
 		User user2 = userService.getUser("androiduser", "admin");
-		this.addLocationToUser(48.200001,16.3,user2);
+		this.addLocationToUser(48.205,16.307,user2);
 		
 		User user3 = userService.getUser("test", "test");
-		this.addLocationToUser(48.2,16.300001,user3);
+		this.addLocationToUser(48.105,16.206,user3);
 		
 	}
 
@@ -90,6 +90,12 @@ public class PopulateDB {
 		
 		List<User> users = locationDao.getNearUsers(48.2, 16.3, 0.0001, new Long(1000*60*20));
 		System.out.println(users.size());
+		
+//		System.out.println("HALLLLLLLLLLLLLLLLLLOOO");
+//		User useradmin = userService.getUser("admin", "admin");
+//		List<User> us = userService.retrieveNearUsers(useradmin, 48.2, 16.29999, 0.0001);
+//		System.out.println("Number: "+us.size());
+		
 	}
 	
 	
