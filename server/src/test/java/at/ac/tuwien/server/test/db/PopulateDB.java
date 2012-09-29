@@ -19,6 +19,7 @@ import at.ac.tuwien.server.dao.IUserDao;
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Race;
 import at.ac.tuwien.server.domain.User;
+import at.ac.tuwien.server.service.interfaces.IRaceService;
 import at.ac.tuwien.server.service.interfaces.IUserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,6 +35,9 @@ public class PopulateDB {
 	
 	@Autowired
 	IUserService userService;
+	
+	@Autowired
+	IRaceService raceService;
 	
 	@Test
 	@Transactional
@@ -64,6 +68,10 @@ public class PopulateDB {
 		//this needs another transaction (race must be saved before)
 		User user2 = userService.getUser("admin", "admin");
 		this.addLocationToUser(48.2,16.3,user2);
+		
+		User user1 = userService.getUser("peter", "admin");
+		
+		userService.addFriend(user2, user1);
 	}
 	
 	
@@ -80,6 +88,18 @@ public class PopulateDB {
 		User user3 = userService.getUser("test", "test");
 		this.addLocationToUser(48.105,16.206,user3);
 		
+	}
+	
+	@Test
+	@Transactional
+	@Rollback(false)
+	public void fillDb4(){
+		
+		User user1 = userService.getUser("peter", "admin");
+		
+		List<String> userids = new ArrayList<String>();
+		userids.add(userService.getUser("admin", "admin").getId().toString());
+		raceService.sendRaceInvitation(user1, userids, "PeterRace");
 	}
 
 	@Test
