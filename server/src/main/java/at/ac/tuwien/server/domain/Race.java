@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Race {
+public class Race implements Comparable<Race>{
 
 	@Id
 	@Column(name = "id")
@@ -110,6 +110,21 @@ public class Race {
 			Set<Location> locs = new TreeSet<Location>();
 			locs.add(loc);
 			this.setLocations(locs);
+		}
+	}
+
+	@Override
+	public int compareTo(Race o) {
+		final int BEFORE = -1;
+		final int EQUAL = 0;
+		final int AFTER = 1;
+		
+		if(this.id < o.getId()){
+			return BEFORE;
+		}else if( this.id == o.getId()){
+			return EQUAL;
+		}else{
+			return AFTER;
 		}
 	}
 	

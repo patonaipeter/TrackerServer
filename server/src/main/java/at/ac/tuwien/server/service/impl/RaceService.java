@@ -93,7 +93,7 @@ public class RaceService implements IRaceService {
 			m.setSentDate(new Date());
 			m.setSender(u);
 			m.setReceiver(receiver);
-			
+			m.setMsgText(""+race.getId());
 			messageDao.saveMsg(m);
 		}
 		//update
