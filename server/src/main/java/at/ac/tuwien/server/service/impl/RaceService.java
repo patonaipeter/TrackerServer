@@ -24,6 +24,7 @@ import at.ac.tuwien.server.service.interfaces.IUserService;
 @Service("raceService")
 public class RaceService implements IRaceService {
 
+	private static final int NOIDSET = -1;
 	@Autowired
 	IRaceDao raceDao;
 	@Autowired
@@ -82,19 +83,21 @@ public class RaceService implements IRaceService {
 		
 		Race race = raceDao.saveNewRace(raceName);
 		race.addParticipant(u);
-		for(String idString : userids){
-			Integer id = Integer.parseInt(idString);
-			User receiver =  userService.getUserById(id);
-			//TODO
-			race.addParticipant(receiver);
-			
-			Message m = new Message();
-			m.setMsgType(MessageType.RACEINVITATION);
-			m.setSentDate(new Date());
-			m.setSender(u);
-			m.setReceiver(receiver);
-			m.setMsgText(""+race.getId());
-			messageDao.saveMsg(m);
+		if(userids != null){
+			for(String idString : userids){
+				Integer id = Integer.parseInt(idString);
+				User receiver =  userService.getUserById(id);
+				//TODO
+				race.addParticipant(receiver);
+
+				Message m = new Message();
+				m.setMsgType(MessageType.RACEINVITATION);
+				m.setSentDate(new Date());
+				m.setSender(u);
+				m.setReceiver(receiver);
+				m.setMsgText(""+race.getId());
+				messageDao.saveMsg(m);
+			}
 		}
 		//update
 		raceDao.saveRace(race);
@@ -104,7 +107,8 @@ public class RaceService implements IRaceService {
 	@Override
 	@Transactional
 	public void setRaceLocation(int id, Location loc) {
-		Race race = this.getRaceById(new Integer(id));
+		Race race;
+		race = this.getRaceById(new Integer(id));
 		locationDao.saveLocation(loc);
 		race.addLocation(loc);
 		raceDao.saveRace(race);

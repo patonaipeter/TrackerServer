@@ -313,11 +313,12 @@ public class SocialController {
 		String raceName = requestData.getFirst("racename");
 		String userIdString = requestData.getFirst("useridstring"); //the id-s of the invited users comma separated
 		User u = userService.getUser(username, password);
-		
-		List<String> userids = new ArrayList<String>(Arrays.asList(userIdString.split(",")));
-		
+		List<String> userids = null;
+		if(!userIdString.equals("")){
+			userids = new ArrayList<String>(Arrays.asList(userIdString.split(",")));
+			
+		}
 		Integer raceId = raceService.sendRaceInvitation(u , userids, raceName);
-	
 		return ""+raceId;
 	}
 	
