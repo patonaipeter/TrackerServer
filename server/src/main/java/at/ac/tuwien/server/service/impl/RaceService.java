@@ -111,6 +111,8 @@ public class RaceService implements IRaceService {
 		race = this.getRaceById(new Integer(id));
 		locationDao.saveLocation(loc);
 		race.addLocation(loc);
+		
+		//TODO update race distance, avg speed
 		raceDao.saveRace(race);
 		
 	}
