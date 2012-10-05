@@ -1,4 +1,4 @@
-package at.ac.tuwien.server.dao;
+package at.ac.tuwien.server.dao.interfaces;
 
 import java.util.List;
 import java.util.Set;

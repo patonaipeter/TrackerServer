@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import at.ac.tuwien.server.dao.interfaces.ILocationDao;
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Race;
 import at.ac.tuwien.server.domain.User;

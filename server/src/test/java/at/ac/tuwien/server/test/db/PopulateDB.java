@@ -13,9 +13,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import at.ac.tuwien.server.Constants;
-import at.ac.tuwien.server.dao.ILocationDao;
-import at.ac.tuwien.server.dao.IRaceDao;
-import at.ac.tuwien.server.dao.IUserDao;
+import at.ac.tuwien.server.dao.interfaces.ILocationDao;
+import at.ac.tuwien.server.dao.interfaces.IRaceDao;
+import at.ac.tuwien.server.dao.interfaces.IUserDao;
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Race;
 import at.ac.tuwien.server.domain.User;

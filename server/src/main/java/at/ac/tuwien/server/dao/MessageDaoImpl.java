@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import at.ac.tuwien.server.dao.interfaces.IMessageDao;
 import at.ac.tuwien.server.domain.Message;
 import at.ac.tuwien.server.domain.User;
 

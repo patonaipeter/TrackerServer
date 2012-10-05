@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import at.ac.tuwien.server.Constants;
-import at.ac.tuwien.server.dao.ILocationDao;
-import at.ac.tuwien.server.dao.IMessageDao;
-import at.ac.tuwien.server.dao.IRaceDao;
-import at.ac.tuwien.server.dao.IUserDao;
+import at.ac.tuwien.server.dao.interfaces.ILocationDao;
+import at.ac.tuwien.server.dao.interfaces.IMessageDao;
+import at.ac.tuwien.server.dao.interfaces.IRaceDao;
+import at.ac.tuwien.server.dao.interfaces.IUserDao;
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Message;
 import at.ac.tuwien.server.domain.MessageType;
@@ -42,7 +42,7 @@ public class UserService implements IUserService {
 		user.setRegister_date(new Date());
 		userDao.addUser(user);
 		
-		//initiate default race (the race to that we store baseic logging infos)
+		//initiate default race (the race to that we store basic logging infos)
 		Race race = new Race();
 		List<User> userList = new ArrayList<User>();
 		userList.add(user);

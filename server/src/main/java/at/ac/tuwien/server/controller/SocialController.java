@@ -15,10 +15,9 @@
  */
 package at.ac.tuwien.server.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -359,6 +358,7 @@ public class SocialController {
 		loc.setLatitude(Double.parseDouble(latitude));
 		loc.setLongitude(Double.parseDouble(longitude));
 		loc.setAltitude(Double.parseDouble(altitude));
+		loc.setTimestamp(new Date());
 		loc.setUser(u);
 		raceService.setRaceLocation(Integer.parseInt(raceid), loc);
 		

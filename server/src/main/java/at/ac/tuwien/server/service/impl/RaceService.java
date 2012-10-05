@@ -10,16 +10,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import at.ac.tuwien.server.Constants;
-import at.ac.tuwien.server.dao.ILocationDao;
-import at.ac.tuwien.server.dao.IMessageDao;
-import at.ac.tuwien.server.dao.IRaceDao;
+import at.ac.tuwien.server.dao.interfaces.ILocationDao;
+import at.ac.tuwien.server.dao.interfaces.IMessageDao;
+import at.ac.tuwien.server.dao.interfaces.IRaceDao;
+import at.ac.tuwien.server.dao.interfaces.IRaceStatisticsDao;
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Message;
 import at.ac.tuwien.server.domain.MessageType;
 import at.ac.tuwien.server.domain.Race;
+import at.ac.tuwien.server.domain.RaceStatistics;
 import at.ac.tuwien.server.domain.User;
 import at.ac.tuwien.server.service.interfaces.IRaceService;
 import at.ac.tuwien.server.service.interfaces.IUserService;
+import at.ac.tuwien.server.service.stats.StatisticsHelper;
 
 @Service("raceService")
 public class RaceService implements IRaceService {
@@ -33,6 +36,8 @@ public class RaceService implements IRaceService {
 	IUserService userService;
 	@Autowired
 	IMessageDao messageDao;
+	@Autowired
+	IRaceStatisticsDao raceStatisticsDao;
 	
 	@Override
 	@Transactional
@@ -109,10 +114,50 @@ public class RaceService implements IRaceService {
 	public void setRaceLocation(int id, Location loc) {
 		Race race;
 		race = this.getRaceById(new Integer(id));
+		loc.setRace(race);
+
+		//get last point to race and user
+		Location lastSavedLoc = raceDao.getLastLocationForRaceAndUser(race, loc.getUser());
+		
 		locationDao.saveLocation(loc);
 		race.addLocation(loc);
-		
 		//TODO update race distance, avg speed
+//		Location firstSavedLoc = raceDao.getFirstLocationForRaceAndUser(race,loc.getUser());
+		//calculate distance between the points
+		double distance = StatisticsHelper.calculateDistanceBetweenPoints(lastSavedLoc, loc);
+		//get raceStatistics -object to raceid and user IF ANY
+		RaceStatistics stat = raceStatisticsDao.retrieveRaceStatisticsForRaceAndUser(race, loc.getUser());
+		//calculate avg speed
+		if(stat == null){
+			//create new RaceStatistics
+			RaceStatistics raceStat = new RaceStatistics();
+			raceStat.setRace(race);
+			raceStat.setUser(loc.getUser());
+			raceStat.setDistance(new Double(0));
+			raceStat.setAvgSpeed(new Double(0));
+			raceStatisticsDao.saveRaceStats(raceStat);
+		}else{
+			if(lastSavedLoc == null){
+				//should not be possible to reach this part
+				stat.setDistance(distance);
+				stat.setAvgSpeed(new Double(0));
+				raceStatisticsDao.saveRaceStats(stat);
+			}else{
+				double distanceBefore = stat.getDistance();
+				double avgSpeedBefore = stat.getAvgSpeed();
+				double timeBefore = 0; 							//in hours
+				if(avgSpeedBefore != 0) {
+					timeBefore = distanceBefore/avgSpeedBefore;
+				}
+
+				stat.setDistance(stat.getDistance()+distance);
+//				double timeAfter = (new Date().getTime() - lastSavedLoc.getTimestamp().getTime()) / (1000*60*60); //hours
+				Double avgSpeed = (distanceBefore+distance) / ( (timeBefore + new Date().getTime() - lastSavedLoc.getTimestamp().getTime()) / (1000*60*60));
+				stat.setAvgSpeed(avgSpeed);
+				raceStatisticsDao.saveRaceStats(stat);
+			}
+		}
+		
 		raceDao.saveRace(race);
 		
 	}

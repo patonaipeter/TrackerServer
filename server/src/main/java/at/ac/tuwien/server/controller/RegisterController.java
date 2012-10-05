@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import at.ac.tuwien.server.Message;
-import at.ac.tuwien.server.dao.IUserDao;
+import at.ac.tuwien.server.dao.interfaces.IUserDao;
 import at.ac.tuwien.server.domain.User;
 import at.ac.tuwien.server.service.interfaces.IUserService;
 

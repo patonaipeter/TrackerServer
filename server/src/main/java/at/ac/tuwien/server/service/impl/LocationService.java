@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import at.ac.tuwien.server.dao.ILocationDao;
-import at.ac.tuwien.server.dao.IRaceDao;
+import at.ac.tuwien.server.dao.interfaces.ILocationDao;
+import at.ac.tuwien.server.dao.interfaces.IRaceDao;
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Race;
 import at.ac.tuwien.server.domain.User;

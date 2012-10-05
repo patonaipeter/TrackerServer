@@ -63,8 +63,12 @@ public class StatisticsHelper {
 		}
 	}
 
-	private static double calculateDistanceBetweenPoints(Location lastElem,	Location l) {
-		return haversine_km(lastElem.getLatitude(), lastElem.getLongitude(), l.getLatitude(), l.getLongitude());
+	public static double calculateDistanceBetweenPoints(Location lastElem,	Location l) {
+		if(lastElem == null || l == null){
+			return 0;
+		}else{
+			return haversine_km(lastElem.getLatitude(), lastElem.getLongitude(), l.getLatitude(), l.getLongitude());
+		}
 	}
 	
 	//calculate distance in kilometer

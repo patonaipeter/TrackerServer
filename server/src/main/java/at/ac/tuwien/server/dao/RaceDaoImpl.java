@@ -2,12 +2,15 @@ package at.ac.tuwien.server.dao;
 
 import java.util.Set;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import at.ac.tuwien.server.Constants;
+import at.ac.tuwien.server.dao.interfaces.IRaceDao;
+import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Race;
 import at.ac.tuwien.server.domain.User;
 import at.ac.tuwien.server.service.stats.StatisticsHelper;
@@ -57,6 +60,18 @@ public class RaceDaoImpl implements IRaceDao {
 		sessionFactory.getCurrentSession().saveOrUpdate(race);
 		sessionFactory.getCurrentSession().flush();
 		return race;
+	}
+	@Override
+	@Transactional
+	public Location getLastLocationForRaceAndUser(Race race, User user) {
+		
+		if(race == null || user == null) return null;
+		
+		Query q = sessionFactory.getCurrentSession().createQuery("select l from Location l where l.race.id =:raceid AND l.user.id =:userid order by l.timestamp desc");
+		q.setParameter("raceid", race.getId());
+		q.setParameter("userid", user.getId());
+		q.setMaxResults(1);
+		return (Location) q.uniqueResult();
 	}
 	
 

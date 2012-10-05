@@ -1,7 +1,8 @@
-package at.ac.tuwien.server.dao;
+package at.ac.tuwien.server.dao.interfaces;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Race;
 import at.ac.tuwien.server.domain.User;
 
@@ -19,6 +20,8 @@ public interface IRaceDao {
 	public Race getRaceById(Integer id);
 	@Transactional
 	public Race saveNewRace(String raceName);
+	@Transactional
+	public Location getLastLocationForRaceAndUser(Race race, User user);
 
 	
 }
