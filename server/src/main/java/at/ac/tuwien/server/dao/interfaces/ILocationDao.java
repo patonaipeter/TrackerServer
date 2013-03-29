@@ -24,6 +24,12 @@ public interface ILocationDao {
 	public Location getFirstLocation(Race defaultLoggingRace);
 	
 	@Transactional
+	public Location getLastLocationOfUser(Race defaultLoggingRace, User u);
+	
+	@Transactional
+	public Location getFirstLocationOfUser(Race defaultLoggingRace, User u);
+	
+	@Transactional
 	public List<User> getNearUsers(Double longitude, Double latitude, Double radius,
 			Long timeinterval);
 

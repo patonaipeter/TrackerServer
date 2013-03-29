@@ -29,7 +29,7 @@ public class StatisticsHelper {
 				continue;
 			}else{
 				distance = distance + calculateDistanceBetweenPoints(lastElem, l);
-				overallElevation = overallElevation + calculateElevationBetweenTwoPoints(lastElem, l);
+				//overallElevation = overallElevation + calculateElevationBetweenTwoPoints(lastElem, l);
 				lastElem = l;
 			}
 		}

@@ -55,6 +55,30 @@ public class LocationDaoImpl implements ILocationDao {
 		return (Location) q.uniqueResult();
 	}
 	
+	@Transactional
+	public Location getLastLocationOfUser(Race defaultLoggingRace, User user) {
+		
+		if(defaultLoggingRace.getId() == null) return null;
+		
+		Query q = sessionFactory.getCurrentSession().createQuery("select l from Location l where l.race.id =:raceid AND l.user.id =:userid order by l.timestamp desc");
+		q.setParameter("raceid", defaultLoggingRace.getId());
+		q.setParameter("userid", user.getId());
+		q.setMaxResults(1);
+		return (Location) q.uniqueResult();
+	}
+	
+	@Transactional
+	public Location getFirstLocationOfUser(Race defaultLoggingRace, User user) {
+		
+		if(defaultLoggingRace.getId() == null) return null;
+		
+		Query q = sessionFactory.getCurrentSession().createQuery("select l from Location l where l.race.id =:raceid AND l.user.id =:userid order by l.timestamp asc");
+		q.setParameter("raceid", defaultLoggingRace.getId());
+		q.setParameter("userid", user.getId());
+		q.setMaxResults(1);
+		return (Location) q.uniqueResult();
+	}
+	
 	@Override
 	@Transactional
 	public List<User> getNearUsers(Double longitude, Double latitude, Double radius, Long timeinterval) {

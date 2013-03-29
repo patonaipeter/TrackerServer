@@ -2,6 +2,7 @@ package at.ac.tuwien.server.domain.dtos;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="racestatisticslistdto")
@@ -27,6 +28,7 @@ public class RaceStatisticsListDTO {
 	public void setRaceName(String raceName) {
 		this.raceName = raceName;
 	}
+	@XmlElement(name="racestatisticsdto")
 	public List<RaceStatisticsDTO> getStats() {
 		return stats;
 	}

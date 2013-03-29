@@ -45,14 +45,16 @@ public class LocationService implements ILocationService {
 				l.setUser(u);
 			}
 			locationDao.saveLocations(locations);
-			//add
-			defaultLoggingRace.setLocations(locations);
 			
 			//update race statistics (distance elevation avgspeed)
 			defaultLoggingRace = StatisticsHelper.updateRaceStats(defaultLoggingRace, 
 											 locations,
-											 locationDao.getLastLocation(defaultLoggingRace),
-											 locationDao.getFirstLocation(defaultLoggingRace));
+											 locationDao.getLastLocationOfUser(defaultLoggingRace, u),
+											 locationDao.getFirstLocationOfUser(defaultLoggingRace, u));
+			
+			//add
+			defaultLoggingRace.setLocations(locations);
+			
 			
 			raceDao.saveRace(defaultLoggingRace);
 

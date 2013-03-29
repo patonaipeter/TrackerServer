@@ -51,8 +51,8 @@ public class RaceController {
 			RaceStatisticsDTO dto = new RaceStatisticsDTO();
 			dto.setAvgSpeed(r.getAvgSpeed());
 			dto.setDistance(r.getDistance());
-			dto.setUserid(user.getId());
-			dto.setUsername(user.getUsername());
+			dto.setUserid(r.getUser().getId());
+			dto.setUsername(r.getUser().getUsername());
 			dtos.add(dto);
 		}
 		RaceStatisticsListDTO liste = new RaceStatisticsListDTO();

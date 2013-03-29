@@ -123,6 +123,7 @@ public class PopulateDB {
 		Location loc = new Location();
 		loc.setLatitude(e);
 		loc.setLongitude(d);
+		loc.setAltitude(new Double(0));
 		loc.setUser(user2);
 		loc.setRace(raceDao.getDefaultRaceForUser(user2));
 		loc.setTimestamp(new Date());
