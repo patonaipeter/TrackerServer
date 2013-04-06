@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Set;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +45,6 @@ public class LocationService implements ILocationService {
 				l.setRace(defaultLoggingRace);
 				l.setUser(u);
 			}
-			locationDao.saveLocations(locations);
 			
 			//update race statistics (distance elevation avgspeed)
 			defaultLoggingRace = StatisticsHelper.updateRaceStats(defaultLoggingRace, 
@@ -52,6 +52,14 @@ public class LocationService implements ILocationService {
 											 locationDao.getLastLocationOfUser(defaultLoggingRace, u),
 											 locationDao.getFirstLocationOfUser(defaultLoggingRace, u));
 			
+			try {
+				locationDao.saveLocations(locations);
+			} catch (ConstraintViolationException e) {
+				// TODO: handle exception
+				//trying to save locations data are already in the db, nothing to worry about
+			}
+			
+					
 			//add
 			defaultLoggingRace.setLocations(locations);
 			

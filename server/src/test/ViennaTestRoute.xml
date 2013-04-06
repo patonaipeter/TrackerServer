@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" creator="Oregon 400t" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+  <metadata>
+    <link href="http://www.garmin.com">
+      <text>Garmin International</text>
+    </link>
+    <time>2009-10-17T22:58:43Z</time>
+  </metadata>
+  <trk>
+    <name>Test GPX Document 3,3km</name>
+    <trkseg>
+      <trkpt lat="48.24402" lon="16.36907">
+        <ele>4.46</ele>
+        <time>2013-04-04T18:37:26Z</time>
+      </trkpt>
+      <trkpt lat="48.24436" lon="16.36822">
+        <ele>4.94</ele>
+        <time>2013-04-04T18:39:31Z</time>
+      </trkpt>
+      <trkpt lat="48.24436" lon="16.36822">
+        <ele>6.87</ele>
+        <time>2013-04-04T18:40:34Z</time>
+      </trkpt>
+	  <trkpt lat="48.24262" lon="16.36682">
+        <ele>5.87</ele>
+        <time>2013-04-04T18:41:34Z</time>
+      </trkpt>
+	  <trkpt lat="48.24262" lon="16.36682">
+        <ele>4.87</ele>
+        <time>2013-04-04T18:43:34Z</time>
+      </trkpt>
+	  <trkpt lat="48.23953" lon="16.36467">
+        <ele>6.87</ele>
+        <time>2013-04-04T18:46:34Z</time>
+      </trkpt>
+	  <trkpt lat="48.23754" lon="16.36511">
+        <ele>5.87</ele>
+        <time>2013-04-04T18:48:34Z</time>
+      </trkpt>
+	  <trkpt lat="48.23754" lon="16.36511">
+        <ele>6.27</ele>
+        <time>2013-04-04T18:49:34Z</time>
+      </trkpt>
+	  <trkpt lat="48.23749" lon="16.36512">
+        <ele>6.17</ele>
+        <time>2013-04-04T18:50:59Z</time>
+      </trkpt>
+	   <trkpt lat="48.23654" lon="16.36529">
+        <ele>6.17</ele>
+        <time>2013-04-04T18:51:59Z</time>
+      </trkpt>
+	   <trkpt lat="48.23654" lon="16.36529">
+        <ele>6.17</ele>
+        <time>2013-04-04T18:53:20Z</time>
+      </trkpt>
+	   <trkpt lat="48.23463" lon="16.3657">
+        <ele>6.17</ele>
+        <time>2013-04-04T18:54:34Z</time>
+      </trkpt>
+	    <trkpt lat="48.23356" lon="16.36591">
+        <ele>6.17</ele>
+        <time>2013-04-04T18:55:34Z</time>
+      </trkpt>
+	    <trkpt lat="48.23373" lon="16.36791">
+        <ele>6.17</ele>
+        <time>2013-04-04T18:56:34Z</time>
+      </trkpt>
+	    <trkpt lat="48.2339" lon="16.37014">
+        <ele>6.17</ele>
+        <time>2013-04-04T18:57:44Z</time>
+      </trkpt>
+	    <trkpt lat="48.2339" lon="16.37027">
+        <ele>6.17</ele>
+        <time>2013-04-04T18:58:34Z</time>
+      </trkpt>
+	    <trkpt lat="48.23551" lon="16.37037">
+        <ele>6.17</ele>
+        <time>2013-04-04T18:59:44Z</time>
+      </trkpt>
+	    <trkpt lat="48.23563" lon="16.37225">
+        <ele>6.17</ele>
+        <time>2013-04-04T19:00:46Z</time>
+      </trkpt>
+	    <trkpt lat="48.23732" lon="16.37286">
+        <ele>6.17</ele>
+        <time>2013-04-04T19:01:26Z</time>
+      </trkpt>
+	   <trkpt lat="48.23788" lon="16.37405">
+        <ele>6.17</ele>
+        <time>2013-04-04T19:03:46Z</time>
+      </trkpt>
+	   <trkpt lat="48.23917" lon="16.37687">
+        <ele>6.17</ele>
+        <time>2013-04-04T19:04:56Z</time>
+      </trkpt>
+	  <trkpt lat="48.23922" lon="16.37693">
+        <ele>6.17</ele>
+        <time>2013-04-04T19:05:23Z</time>
+      </trkpt>
+	  <trkpt lat="48.2417" lon="16.37471">
+        <ele>6.17</ele>
+        <time>2013-04-04T19:06:26Z</time>
+      </trkpt>
+	  <trkpt lat="48.242" lon="16.37457">
+        <ele>6.17</ele>
+        <time>2013-04-04T19:07:36Z</time>
+      </trkpt>
+	  <trkpt lat="48.24227" lon="16.37437">
+        <ele>6.17</ele>
+        <time>2013-04-04T19:08:36Z</time>
+      </trkpt>
+	  <trkpt lat="48.24222" lon="16.37424">
+        <ele>6.17</ele>
+        <time>2013-04-04T19:09:36Z</time>
+      </trkpt>
+	  <trkpt lat="48.24399" lon="16.36915">
+        <ele>6.17</ele>
+        <time>2013-04-04T19:10:36Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

@@ -29,7 +29,7 @@ public class StatisticsHelper {
 				continue;
 			}else{
 				distance = distance + calculateDistanceBetweenPoints(lastElem, l);
-				//overallElevation = overallElevation + calculateElevationBetweenTwoPoints(lastElem, l);
+				overallElevation = overallElevation + calculateElevationBetweenTwoPoints(lastElem, l);
 				lastElem = l;
 			}
 		}
@@ -40,13 +40,15 @@ public class StatisticsHelper {
 		//timeitervall
 		long timeIntervallInMillis = 0;
 		Location[] locs = updatedLocations.toArray(new Location[updatedLocations.size()]);
+		//ordered backwards
 		if(firstDBlocation == null){
-			timeIntervallInMillis = locs[locs.length-1].getTimestamp().getTime() - locs[0].getTimestamp().getTime();
+			timeIntervallInMillis = locs[0].getTimestamp().getTime() - locs[locs.length-1].getTimestamp().getTime();
 		}else{
-			timeIntervallInMillis = locs[locs.length-1].getTimestamp().getTime()-firstDBlocation.getTimestamp().getTime();
+			timeIntervallInMillis = locs[0].getTimestamp().getTime()-firstDBlocation.getTimestamp().getTime();
 		}
 		//km/h
-		race.setAvgSpeed(new Double(race.getDistance()/(timeIntervallInMillis/(1000*60*60))));
+		double temp = new Double(timeIntervallInMillis)/new Double(1000*60*60);
+		race.setAvgSpeed(new Double(race.getDistance()/temp));
 		
 		
 		return race;

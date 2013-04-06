@@ -8,8 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = {"altitude", "latitude", "timestamp", "longitude", "race_id", "user_id"})})
 public class Location implements Comparable<Location>{
 
 	@Id
@@ -80,6 +83,12 @@ public class Location implements Comparable<Location>{
 			return BEFORE;
 		}
 	}
+	
+	
+
+	
+	
+	
 	public User getUser() {
 		return user;
 	}
