@@ -55,8 +55,8 @@ public class PopulateDB {
 		
 		User user1 = userService.getUser("peter", "admin");
 		User user2 = userService.getUser("admin", "admin");
-	
-		userService.sendFriendRequest(user1, user2);
+//		testing friend request
+//		userService.sendFriendRequest(user1, user2);
 		
 		
 	}
@@ -67,7 +67,7 @@ public class PopulateDB {
 	public void fillDb2(){
 		//this needs another transaction (race must be saved before)
 		User user2 = userService.getUser("admin", "admin");
-//		this.addLocationToUser(48.2,16.3,user2);
+		this.addLocationToUser(48.2,16.3,user2);
 		
 		User user1 = userService.getUser("peter", "admin");
 		

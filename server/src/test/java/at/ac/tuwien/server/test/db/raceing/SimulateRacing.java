@@ -1,4 +1,4 @@
-package at.ac.tuwien.server.test.db;
+package at.ac.tuwien.server.test.db.raceing;
 
 import java.util.Date;
 
@@ -44,8 +44,8 @@ public class SimulateRacing {
 		User user1 = userService.getUser("peter", "admin");
 	
 		Location loc = new Location();
-		loc.setLatitude(new Double(1.0));
-		loc.setLongitude(new Double(1.0));
+		loc.setLatitude(new Double(10.0012));
+		loc.setLongitude(new Double(10.012));
 		loc.setAltitude(new Double(0));
 		loc.setTimestamp(new Date());
 		loc.setUser(user1);
