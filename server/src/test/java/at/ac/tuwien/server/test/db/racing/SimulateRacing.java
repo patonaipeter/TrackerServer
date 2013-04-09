@@ -51,7 +51,7 @@ public class SimulateRacing {
 			setNewRaceLocation(user1, new Integer(9), longitude, latitude);
 			
 			try {
-				wait(2000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
