@@ -1,4 +1,4 @@
-package at.ac.tuwien.server.test.db.raceing;
+package at.ac.tuwien.server.test.db.racing;
 
 import java.util.Date;
 
@@ -20,7 +20,7 @@ import at.ac.tuwien.server.service.interfaces.IUserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:root-context-test2.xml")
-public class SimulateRacing {
+public class SimulateRacing2 {
 
 	@Autowired
 	IUserDao userDao;
@@ -40,19 +40,39 @@ public class SimulateRacing {
 	@Rollback(false)
 	public void saveRaceUpdate1(){
 		
+		//this test sets one race location in every 2 seconds 
 		
-		User user1 = userService.getUser("peter", "admin");
+		User user1 = userService.getUser("adroiduser", "admin");
+		double longitude = 10;
+		double latitude = 10;
+		for(int i = 0; i< 50; i++){
+			longitude += i*0.0003;
+			latitude += i*0.0003;
+			setNewRaceLocation(user1, new Integer(9), longitude, latitude);
+			
+			try {
+				wait(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	
-		Location loc = new Location();
-		loc.setLatitude(new Double(10.0012));
-		loc.setLongitude(new Double(10.012));
-		loc.setAltitude(new Double(0));
-		loc.setTimestamp(new Date());
-		loc.setUser(user1);
-		
-		raceService.setRaceLocation(new Integer(9), loc);
 	}
 
 	
+	
+	@Transactional
+	@Rollback(false)
+	public void setNewRaceLocation(User user, Integer raceId, double longitude , double latitude){
+		Location loc = new Location();
+		loc.setLatitude(latitude);
+		loc.setLongitude(longitude);
+		loc.setAltitude(new Double(0));
+		loc.setTimestamp(new Date());
+		loc.setUser(user);
+		
+		raceService.setRaceLocation(raceId, loc);
+		
+	}
 	
 }

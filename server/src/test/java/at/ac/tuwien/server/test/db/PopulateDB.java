@@ -70,8 +70,10 @@ public class PopulateDB {
 		this.addLocationToUser(48.2,16.3,user2);
 		
 		User user1 = userService.getUser("peter", "admin");
+		User user3 = userService.getUser("androiduser", "admin");
 		
 		userService.addFriend(user2, user1);
+		userService.addFriend(user2, user3);
 	}
 	
 	
