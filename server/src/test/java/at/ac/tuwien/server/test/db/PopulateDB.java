@@ -74,6 +74,7 @@ public class PopulateDB {
 		
 		userService.addFriend(user2, user1);
 		userService.addFriend(user2, user3);
+		
 	}
 	
 	

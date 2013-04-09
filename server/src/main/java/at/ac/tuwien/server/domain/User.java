@@ -9,8 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -45,7 +46,10 @@ public class User {
 	private Date register_date;
 	private Date last_activity_date;
 	
-	@OneToMany
+	@ManyToMany
+	@JoinTable(name = "user_friends", 
+	    joinColumns = @JoinColumn(name = "user_id"), 
+	    inverseJoinColumns = @JoinColumn(name = "friend_id"))
 	private List<User> friends;
 	
 	@ManyToMany(mappedBy = "participants")
