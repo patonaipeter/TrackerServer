@@ -36,22 +36,20 @@ public class SimulateRacing2 {
 	IRaceService raceService;
 	
 	@Test
-	@Transactional
-	@Rollback(false)
 	public void saveRaceUpdate1(){
 		
 		//this test sets one race location in every 2 seconds 
 		
-		User user1 = userService.getUser("adroiduser", "admin");
+		User user1 = userService.getUser("androiduser", "admin");
 		double longitude = 10;
 		double latitude = 10;
 		for(int i = 0; i< 50; i++){
-			longitude += i*0.0003;
-			latitude += i*0.0003;
+			longitude += i*0.00003;
+			latitude += i*0.00003;
 			setNewRaceLocation(user1, new Integer(9), longitude, latitude);
 			
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

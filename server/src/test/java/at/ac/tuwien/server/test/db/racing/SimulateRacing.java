@@ -36,8 +36,6 @@ public class SimulateRacing {
 	IRaceService raceService;
 	
 	@Test
-	@Transactional
-	@Rollback(false)
 	public void saveRaceUpdate1(){
 		
 		//this test sets one race location in every 2 seconds 
@@ -46,12 +44,12 @@ public class SimulateRacing {
 		double longitude = 10;
 		double latitude = 10;
 		for(int i = 0; i< 50; i++){
-			longitude += i*0.0002;
-			latitude += i*0.0002;
+			longitude += i*0.00002;
+			latitude += i*0.00002;
 			setNewRaceLocation(user1, new Integer(9), longitude, latitude);
 			
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
