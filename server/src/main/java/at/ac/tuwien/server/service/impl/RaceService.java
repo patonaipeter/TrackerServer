@@ -151,8 +151,9 @@ public class RaceService implements IRaceService {
 				}
 
 				stat.setDistance(stat.getDistance()+distance);
-//				double timeAfter = (new Date().getTime() - lastSavedLoc.getTimestamp().getTime()) / (1000*60*60); //hours
-				Double avgSpeed = (distanceBefore+distance) / ( (timeBefore + new Date().getTime() - lastSavedLoc.getTimestamp().getTime()) / (1000*60*60));
+				double temp = (new Date().getTime() - lastSavedLoc.getTimestamp().getTime());
+				double time = temp / (1000*60*60); //hours
+				Double avgSpeed = (distanceBefore+distance) / (timeBefore + time);
 				stat.setAvgSpeed(avgSpeed);
 				raceStatisticsDao.saveRaceStats(stat);
 			}

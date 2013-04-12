@@ -67,7 +67,7 @@ public class PopulateDB {
 	public void fillDb2(){
 		//this needs another transaction (race must be saved before)
 		User user2 = userService.getUser("admin", "admin");
-		this.addLocationToUser(48.2,16.3,user2);
+		//this.addLocationToUser(48.2,16.3,user2);
 		
 		User user1 = userService.getUser("peter", "admin");
 		User user3 = userService.getUser("androiduser", "admin");
@@ -78,20 +78,20 @@ public class PopulateDB {
 	}
 	
 	
-	@Test
-	@Transactional
-	@Rollback(false)
-	public void fillDb3(){
-		User user1 = userService.getUser("peter", "admin");
-		this.addLocationToUser(48.29,16.25,user1);
-		
-		User user2 = userService.getUser("androiduser", "admin");
-		this.addLocationToUser(48.205,16.307,user2);
-		
-		User user3 = userService.getUser("test", "test");
-		this.addLocationToUser(48.105,16.206,user3);
-		
-	}
+//	@Test
+//	@Transactional
+//	@Rollback(false)
+//	public void fillDb3(){
+//		User user1 = userService.getUser("peter", "admin");
+//		this.addLocationToUser(48.29,16.25,user1);
+//		
+//		User user2 = userService.getUser("androiduser", "admin");
+//		this.addLocationToUser(48.205,16.307,user2);
+//		
+//		User user3 = userService.getUser("test", "test");
+//		this.addLocationToUser(48.105,16.206,user3);
+//		
+//	}
 	
 	@Test
 	@Transactional
