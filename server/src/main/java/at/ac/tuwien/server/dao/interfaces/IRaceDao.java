@@ -1,5 +1,7 @@
 package at.ac.tuwien.server.dao.interfaces;
 
+import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import at.ac.tuwien.server.domain.Location;
@@ -22,6 +24,8 @@ public interface IRaceDao {
 	public Race saveNewRace(String raceName);
 	@Transactional
 	public Location getLastLocationForRaceAndUser(Race race, User user);
+	@Transactional
+	public List<Location> getRaceLocationsForUser(Race race, User user);
 
 	
 }

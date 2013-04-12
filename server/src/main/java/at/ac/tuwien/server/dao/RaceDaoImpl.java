@@ -1,6 +1,6 @@
 package at.ac.tuwien.server.dao;
 
-import java.util.Set;
+import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -72,6 +72,16 @@ public class RaceDaoImpl implements IRaceDao {
 		q.setParameter("userid", user.getId());
 		q.setMaxResults(1);
 		return (Location) q.uniqueResult();
+	}
+	@Override
+	@Transactional
+	public List<Location> getRaceLocationsForUser(Race race, User user) {
+		Query q = sessionFactory.getCurrentSession().createQuery("select l from Location l where l.race.id =:raceid AND l.user.id =:userid order by l.timestamp desc");
+		q.setParameter("raceid", race.getId());
+		q.setParameter("userid", user.getId());
+
+		return (List<Location>) q.list();
+		
 	}
 	
 

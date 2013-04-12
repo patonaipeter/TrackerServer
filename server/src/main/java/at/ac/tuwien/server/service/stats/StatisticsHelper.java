@@ -1,5 +1,6 @@
 package at.ac.tuwien.server.service.stats;
 
+import java.util.List;
 import java.util.Set;
 
 import at.ac.tuwien.server.Constants;
@@ -107,6 +108,22 @@ public class StatisticsHelper {
 		
 		return sum;
 		
+	}
+
+	public static double calculateDistanceBetweenListOfPoints(List<Location> raceLocations) {
+		
+		double sum = 0;
+		Location temp = null;
+		
+		for (Location location : raceLocations) {
+			if(temp == null){
+				temp = location;
+			}else{
+				sum += haversine_km(temp.getLatitude(), temp.getLongitude(), location.getLatitude(), location.getLongitude());
+			}
+		}
+		
+		return sum;
 	}
 
 
