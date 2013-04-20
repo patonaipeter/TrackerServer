@@ -1,5 +1,6 @@
 package at.ac.tuwien.server.service.interfaces;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -22,5 +23,7 @@ public interface IRaceService {
 	public Integer sendRaceInvitation(User u, List<String> userids, String raceName);
 	@Transactional
 	public void setRaceLocation(int parseInt, Location loc);
+	@Transactional
+	void setRaceHistoricalLocation(int id, Location loc);
 	
 }

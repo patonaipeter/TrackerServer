@@ -26,6 +26,7 @@ public interface IRaceDao {
 	public Location getLastLocationForRaceAndUser(Race race, User user);
 	@Transactional
 	public List<Location> getRaceLocationsForUser(Race race, User user);
+	
 
 	
 }

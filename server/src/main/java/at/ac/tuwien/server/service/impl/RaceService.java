@@ -109,45 +109,45 @@ public class RaceService implements IRaceService {
 		return race.getId();
 	}
 	
-//	@Override
-//	@Transactional
-//	public void setRaceLocation(int id, Location loc) {
-//		Race race;
-//		race = this.getRaceById(new Integer(id));
-//		loc.setRace(race);
-//
-//
-//		
-//		locationDao.saveLocation(loc);
-//		race.addLocation(loc);
-//		raceDao.saveRace(race);
-//		
-//		List<Location> raceLocations = raceDao.getRaceLocationsForUser(race, loc.getUser()); 
-//		if(raceLocations.size() >= 2){
-//			
-//		double distance = StatisticsHelper.calculateDistanceBetweenListOfPoints(raceLocations);
-//		double timeInMS = raceLocations.get(0).getTimestamp().getTime() - raceLocations.get(raceLocations.size()-1).getTimestamp().getTime();
-//		double timeInHour = timeInMS / (1000*60*60);
-//		double avgSpeed = distance/timeInHour;
-//		
-//		
-//		RaceStatistics stat = raceStatisticsDao.retrieveRaceStatisticsForRaceAndUser(race, loc.getUser());
-//		stat.setDistance(distance);
-//		stat.setAvgSpeed(avgSpeed);
-//		stat.setRace(race);
-//		stat.setUser(loc.getUser());
-//		raceStatisticsDao.saveRaceStats(stat);
-//		} else {
-//			RaceStatistics raceStat = new RaceStatistics();
-//			raceStat.setRace(race);
-//			raceStat.setUser(loc.getUser());
-//			raceStat.setDistance(new Double(0));
-//			raceStat.setAvgSpeed(new Double(0));
-//			raceStatisticsDao.saveRaceStats(raceStat);
-//		}
-//				
-//		
-//	}
+	@Override
+	@Transactional
+	public void setRaceHistoricalLocation(int id, Location loc) {
+		Race race;
+		race = this.getRaceById(new Integer(id));
+		loc.setRace(race);
+
+
+		
+		locationDao.saveLocation(loc);
+		race.addLocation(loc);
+		raceDao.saveRace(race);
+		
+		List<Location> raceLocations = raceDao.getRaceLocationsForUser(race, loc.getUser()); 
+		if(raceLocations.size() >= 2){
+			
+		double distance = StatisticsHelper.calculateDistanceBetweenListOfPoints(raceLocations);
+		double timeInMS = raceLocations.get(0).getTimestamp().getTime() - raceLocations.get(raceLocations.size()-1).getTimestamp().getTime();
+		double timeInHour = timeInMS / (1000*60*60);
+		double avgSpeed = distance/timeInHour;
+		
+		
+		RaceStatistics stat = raceStatisticsDao.retrieveRaceStatisticsForRaceAndUser(race, loc.getUser());
+		stat.setDistance(distance);
+		stat.setAvgSpeed(avgSpeed);
+		stat.setRace(race);
+		stat.setUser(loc.getUser());
+		raceStatisticsDao.saveRaceStats(stat);
+		} else {
+			RaceStatistics raceStat = new RaceStatistics();
+			raceStat.setRace(race);
+			raceStat.setUser(loc.getUser());
+			raceStat.setDistance(new Double(0));
+			raceStat.setAvgSpeed(new Double(0));
+			raceStatisticsDao.saveRaceStats(raceStat);
+		}
+				
+		
+	}
 
 	@Override
 	@Transactional
@@ -203,4 +203,58 @@ public class RaceService implements IRaceService {
 		
 	}
 
+//	@Override
+//	@Transactional
+//	public void setRaceHistoricalLocation(int id, Location loc, Date date) {
+//		Race race;
+//		race = this.getRaceById(new Integer(id));
+//		loc.setRace(race);
+//
+//		//get last point to race and user
+//		Location lastSavedLoc = raceDao.getLastLocationForRaceAndUser(race, loc.getUser());
+//		
+//		locationDao.saveLocation(loc);
+//		race.addLocation(loc);
+//		//TODO update race distance, avg speed
+////		Location firstSavedLoc = raceDao.getFirstLocationForRaceAndUser(race,loc.getUser());
+//		//calculate distance between the points
+//		double distance = StatisticsHelper.calculateDistanceBetweenPoints(lastSavedLoc, loc);
+//		//get raceStatistics -object to raceid and user IF ANY
+//		RaceStatistics stat = raceStatisticsDao.retrieveRaceStatisticsForRaceAndUser(race, loc.getUser());
+//		//calculate avg speed
+//		if(stat == null){
+//			//create new RaceStatistics
+//			RaceStatistics raceStat = new RaceStatistics();
+//			raceStat.setRace(race);
+//			raceStat.setUser(loc.getUser());
+//			raceStat.setDistance(new Double(0));
+//			raceStat.setAvgSpeed(new Double(0));
+//			raceStatisticsDao.saveRaceStats(raceStat);
+//		}else{
+//			if(lastSavedLoc == null){
+//				//should not be possible to reach this part
+//				stat.setDistance(distance);
+//				stat.setAvgSpeed(new Double(0));
+//				raceStatisticsDao.saveRaceStats(stat);
+//			}else{
+//				double distanceBefore = stat.getDistance();
+//				double avgSpeedBefore = stat.getAvgSpeed();
+//				double timeBefore = 0; 							//in hours
+//				if(avgSpeedBefore != 0) {
+//					timeBefore = distanceBefore/avgSpeedBefore;
+//				}
+//
+//				stat.setDistance(stat.getDistance()+distance);
+//				double temp = (date.getTime() - lastSavedLoc.getTimestamp().getTime());
+//				double time = temp / (1000*60*60); //hours
+//				Double avgSpeed = (distanceBefore+distance) / (timeBefore + time);
+//				stat.setAvgSpeed(avgSpeed);
+//				raceStatisticsDao.saveRaceStats(stat);
+//			}
+//		}
+//		
+//		raceDao.saveRace(race);
+//		
+//	}
+//	
 }
