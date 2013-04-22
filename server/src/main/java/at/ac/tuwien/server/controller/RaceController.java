@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -138,12 +139,21 @@ public class RaceController {
 		String password = requestData.getFirst("password");
 		User user = userService.getUser(username, password);
 		Integer raceId = Integer.parseInt(requestData.getFirst("raceid"));
+		Integer userId = Integer.parseInt(requestData.getFirst("userid"));
 		Race race = raceDao.getRaceById(raceId);
 		Set<Location> locs = race.getLocations();
+		Set<Location> filteredLocs = new TreeSet<Location>();
+		
+		for (Location location : locs) {
+			if(location.getUser().getId() == userId){
+				filteredLocs.add(location);
+			}
+		}
+		
 		
 		LocationListDTO locListDTO = new LocationListDTO();
 		List<LocationDTO> dtos = new ArrayList<LocationDTO>();
-		for(Location l : locs){
+		for(Location l : filteredLocs){
 			LocationDTO dto = new LocationDTO();
 			dto.setAltitude(l.getAltitude());
 			dto.setDate(l.getTimestamp().getTime());
