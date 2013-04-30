@@ -45,6 +45,9 @@ public interface IUserService {
 	public Location getLastPositionOfUser(User u);
 	@Transactional
 	public Location getUserLocationForDate(User u, Long time);
+	@Transactional
+	public void sendMessage(User u, List<String> userids, String msgTopic,
+			String msgText);
 	
 	
 }

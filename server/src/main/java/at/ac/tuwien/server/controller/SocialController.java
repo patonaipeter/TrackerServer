@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import at.ac.tuwien.server.Constants;
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Message;
 import at.ac.tuwien.server.domain.Race;
@@ -155,6 +156,9 @@ public class SocialController {
 		String password = requestData.getFirst("password");
 		User u = userService.getUser(username, password);
 		
+		//TODO more sophisticated login check
+		if(u == null) return null;
+		
 		List<Message> messages = userService.retrieveAllMessagesForUser(u);
 		
 		List<MsgDTO> dtos = new ArrayList<MsgDTO>();
@@ -173,6 +177,39 @@ public class SocialController {
 		
 		return liste;
 		
+	}
+	
+	@Transactional
+	@RequestMapping(value="sendusermessage", method=RequestMethod.POST)
+	public @ResponseBody String sendMessage(@RequestBody LinkedMultiValueMap<String, String> requestData) {
+	
+//	@Transactional
+//	@RequestMapping(value="sendusermessage", method=RequestMethod.POST, headers="Accept=application/xml")
+//	public @ResponseBody String sendMessage(@RequestBody LinkedMultiValueMap<String, String> requestData) {
+		
+		String username = requestData.getFirst("username");
+		String password = requestData.getFirst("password");
+//		String toUser = requestData.getFirst("toUser");
+//		String msgTopic = requestData.getFirst("msgTopic");
+		String msgTopic = "";
+		String msgText = requestData.getFirst("msgText");
+		User u = userService.getUser(username, password);
+		
+		
+		//TODO more sophisticated login check
+		if(u == null) return null;
+		
+		String userIdString = requestData.getFirst("useridstring"); //the id-s of the invited users comma separated
+		List<String> userids = null;
+		if(!userIdString.equals("")){
+			userids = new ArrayList<String>(Arrays.asList(userIdString.split(",")));
+			
+		}
+		
+		userService.sendMessage(u,userids,msgTopic, msgText);
+		
+		
+		return Constants.success;
 	}
 	
 	@Transactional

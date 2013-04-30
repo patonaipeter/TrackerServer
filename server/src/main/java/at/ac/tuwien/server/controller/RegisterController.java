@@ -40,32 +40,32 @@ public class RegisterController {
 	@Autowired
 	IUserService userService;
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String home() {
-		logger.info("Backend Services For Tracker");
-		return "home";
-	}
-	
-	@RequestMapping(value="sendmessage", method=RequestMethod.POST, headers="Content-Type=text/plain")
-	public @ResponseBody String sendMessage(@RequestBody String message) {
-		logger.info("String message: " + message);
-		return "String message received! Your message: " + message;
-	}
-	
-	@RequestMapping(value="sendmessage", method=RequestMethod.POST, headers="Content-Type=application/json")
-	public @ResponseBody String sendMessageJson(@RequestBody Message message) {
-		logger.info("JSON message: " + message.toString());
-		return "JSON message received! Your message: " + message.toString();
-	}
-	
-	@RequestMapping(value="sendmessage", method=RequestMethod.POST, headers="Content-Type=application/xml")
-	public @ResponseBody String sendMessageXml(@RequestBody Message message) {
-		logger.info("XML message: " + message.toString());
-		return "XML message received! Your message: " + message.toString();
-	}
+//	/**
+//	 * Simply selects the home view to render by returning its name.
+//	 */
+//	@RequestMapping(value="/", method=RequestMethod.GET)
+//	public String home() {
+//		logger.info("Backend Services For Tracker");
+//		return "home";
+//	}
+//	
+//	@RequestMapping(value="sendmessage", method=RequestMethod.POST, headers="Content-Type=text/plain")
+//	public @ResponseBody String sendMessage(@RequestBody String message) {
+//		logger.info("String message: " + message);
+//		return "String message received! Your message: " + message;
+//	}
+//	
+//	@RequestMapping(value="sendmessage", method=RequestMethod.POST, headers="Content-Type=application/json")
+//	public @ResponseBody String sendMessageJson(@RequestBody Message message) {
+//		logger.info("JSON message: " + message.toString());
+//		return "JSON message received! Your message: " + message.toString();
+//	}
+//	
+//	@RequestMapping(value="sendmessage", method=RequestMethod.POST, headers="Content-Type=application/xml")
+//	public @ResponseBody String sendMessageXml(@RequestBody Message message) {
+//		logger.info("XML message: " + message.toString());
+//		return "XML message received! Your message: " + message.toString();
+//	}
 	
 	@Transactional
 	@RequestMapping(value="sendmessagemap", method=RequestMethod.POST)

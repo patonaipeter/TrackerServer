@@ -34,6 +34,7 @@ public class UserService implements IUserService {
 	IMessageDao messageDao;
 	@Autowired
 	ILocationDao locationDao;
+
 	
 	@Override
 	@Transactional
@@ -163,6 +164,36 @@ public class UserService implements IUserService {
 	public Location getUserLocationForDate(User u, Long time) {
 		Location location = locationDao.getUserLocationForDate(u, time);
 		return location;
+	}
+
+
+	public void sendMessage(User u, String toUser, String msgTopic,
+			String msgText) {
+		Message m = new Message();
+		m.setMsgType(MessageType.TEXTMSG);
+		m.setSentDate(new Date());
+		m.setSender(u);
+		m.setReceiver(userDao.getUser(toUser));
+		m.setMsgText(msgText);
+		messageDao.saveMsg(m);
+	}
+
+	@Override
+	public void sendMessage(User u, List<String> userids, String msgTopic,
+			String msgText) {
+		
+		for(String id : userids){
+			
+			Message m = new Message();
+			m.setMsgType(MessageType.TEXTMSG);
+			m.setSentDate(new Date());
+			m.setSender(u);
+			m.setReceiver(userDao.getUserById(Integer.parseInt(id)));
+			m.setMsgText(msgText);
+			messageDao.saveMsg(m);
+		}
+		
+		
 	}
 
 }
