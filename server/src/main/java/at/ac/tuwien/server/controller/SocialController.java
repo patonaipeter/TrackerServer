@@ -169,7 +169,7 @@ public class SocialController {
 			dto.setSender(m.getSender().getUsername());
 			dto.setSentDate(m.getSentDate().getTime());
 			dto.setText(m.getMsgText());
-			
+			dto.setMsgType(m.getMsgType().toString());
 			dtos.add(dto);
 		}
 		MsgListDTO liste = new MsgListDTO();
@@ -231,7 +231,7 @@ public class SocialController {
 			dto.setSenderId(m.getSender().getId());
 			dto.setSentDate(m.getSentDate().getTime());
 			dto.setText(m.getMsgText());
-			
+			dto.setMsgType(Constants.FRIENDREQUEST);
 			dtos.add(dto);
 		}
 		MsgListDTO liste = new MsgListDTO();

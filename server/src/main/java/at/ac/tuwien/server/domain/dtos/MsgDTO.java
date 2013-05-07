@@ -10,6 +10,7 @@ public class MsgDTO {
 	private String sender;
 	private Integer senderId;
 	private Long sentDate;
+	private String msgType;
 	public Integer getId() {
 		return id;
 	}
@@ -39,6 +40,12 @@ public class MsgDTO {
 	}
 	public void setSentDate(Long sentDate) {
 		this.sentDate = sentDate;
+	}
+	public String getMsgType() {
+		return msgType;
+	}
+	public void setMsgType(String msgType) {
+		this.msgType = msgType;
 	}
 	
 	

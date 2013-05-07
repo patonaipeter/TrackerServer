@@ -79,14 +79,17 @@ public class BigPopulateDB {
 		User user6 = userService.getUser("samos", "admin");
 		User user7 = userService.getUser("ikarios", "admin");
 		
-		//everybody is friend with admin
+		//everybody is friend with admin 
 		userService.addFriend(user1, user2);
 		userService.addFriend(user1, user3);
 		userService.addFriend(user1, user4);
 		userService.addFriend(user1, user5);
 		userService.addFriend(user1, user6);
-		userService.addFriend(user1, user7);
-		
+//		userService.addFriend(user1, user7);
+		userService.sendFriendRequest(user7, user1);
+		List<String> userlist = new ArrayList<String>();
+		userlist.add(user1.getId()+"");
+		userService.sendMessage(user7, userlist, "Hallo", "Hallo I want to be your friend (this is a message) it is made longer to see whether this thing scales up correctly as i want it to be aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa  aaaaaaaaa aaaaaaaaaaaaaaaaaaaaaa");
 		//other connections
 		userService.addFriend(user2, user3);
 		userService.addFriend(user2, user4);

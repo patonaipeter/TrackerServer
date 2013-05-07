@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Message;
-import at.ac.tuwien.server.domain.Race;
 import at.ac.tuwien.server.domain.User;
 import at.ac.tuwien.server.domain.dtos.StatisticsDTO;
 
@@ -48,6 +47,9 @@ public interface IUserService {
 	@Transactional
 	public void sendMessage(User u, List<String> userids, String msgTopic,
 			String msgText);
+	@Transactional
+	public void sendNearToYouNotification(Message msg);
+	
 	
 	
 }

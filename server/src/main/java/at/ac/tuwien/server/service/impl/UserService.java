@@ -196,4 +196,10 @@ public class UserService implements IUserService {
 		
 	}
 
+	@Override
+	public void sendNearToYouNotification(Message msg) {
+		messageDao.saveMsg(msg);
+		
+	}
+
 }
