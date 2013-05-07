@@ -165,6 +165,10 @@ public class RaceService implements IRaceService {
 //		Location firstSavedLoc = raceDao.getFirstLocationForRaceAndUser(race,loc.getUser());
 		//calculate distance between the points
 		double distance = StatisticsHelper.calculateDistanceBetweenPoints(lastSavedLoc, loc);
+		
+		//update score
+		loc.getUser().setScore(loc.getUser().getScore()+ ((int) distance * Constants.scoreForRaceingDistanceMultiplyer));
+		
 		//get raceStatistics -object to raceid and user IF ANY
 		RaceStatistics stat = raceStatisticsDao.retrieveRaceStatisticsForRaceAndUser(race, loc.getUser());
 		//calculate avg speed

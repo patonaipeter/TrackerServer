@@ -70,6 +70,16 @@ public class UserDaoImpl implements IUserDao{
 	public User getUserById(Integer id) {
 		return (User) sessionFactory.getCurrentSession().get(User.class, id);
 	}
+
+
+	@Override
+	@Transactional
+	public List<User> getTopList() {
+		Query query = sessionFactory.getCurrentSession().createQuery("select u from User u order by u.score DESC" );
+		query.setMaxResults(10);
+		return (List<User>) query.list();
+		
+	}
 	
 	
 }

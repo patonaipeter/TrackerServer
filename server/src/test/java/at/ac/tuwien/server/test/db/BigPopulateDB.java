@@ -100,7 +100,13 @@ public class BigPopulateDB {
 		userService.addFriend(user3, user6);
 		userService.addFriend(user4, user6);
 		
-		
+		user1.setScore(965);
+		user2.setScore(859);
+		user3.setScore(711);
+		user4.setScore(325);
+		user5.setScore(121);
+		user6.setScore(76);
+		user7.setScore(59);
 	}
 	
 	

@@ -202,4 +202,10 @@ public class UserService implements IUserService {
 		
 	}
 
+	@Override
+	@Transactional
+	public List<User> getTopList() {
+		return userDao.getTopList();
+	}
+
 }

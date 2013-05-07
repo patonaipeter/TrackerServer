@@ -21,5 +21,8 @@ public interface IUserDao {
 	List<User> retrieveAllUsers();
 	@Transactional
 	User getUserById(Integer id);
+
+	@Transactional
+	List<User> getTopList();
 	
 }

@@ -354,6 +354,9 @@ public class SocialController {
 			userids = new ArrayList<String>(Arrays.asList(userIdString.split(",")));
 			
 		}
+		//update score
+		u.setScore(u.getScore()+ Constants.scoreForNewRace);
+		
 		Integer raceId = raceService.sendRaceInvitation(u , userids, raceName);
 		return ""+raceId;
 	}

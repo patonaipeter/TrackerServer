@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import at.ac.tuwien.server.Constants;
 import at.ac.tuwien.server.dao.interfaces.ILocationDao;
 import at.ac.tuwien.server.dao.interfaces.IRaceDao;
 import at.ac.tuwien.server.domain.Location;
@@ -53,6 +54,7 @@ public class LocationService implements ILocationService {
 				l.setRace(defaultLoggingRace);
 				l.setUser(u);
 			}
+			int score = (Integer) defaultLoggingRace.getDistance().intValue();
 			
 			//update race statistics (distance elevation avgspeed)
 			defaultLoggingRace = StatisticsHelper.updateRaceStats(defaultLoggingRace, 
@@ -66,6 +68,10 @@ public class LocationService implements ILocationService {
 				// TODO: handle exception
 				//trying to save locations data are already in the db, nothing to worry about
 			}
+			
+			//updating score
+			score = defaultLoggingRace.getDistance().intValue() - score;
+			u.setScore(u.getScore()+score);
 			
 					
 			//add
@@ -90,7 +96,9 @@ public class LocationService implements ILocationService {
 					
 					//send message from every user 
 					userService.sendNearToYouNotification(this.createNearToYouMessage(iUser,loc.getUser()));
-					
+					//Add scores for meeting
+					iUser.setScore(iUser.getScore()+ Constants.scoreForMeeting);
+					loc.getUser().setScore(loc.getUser().getScore() + Constants.scoreForMeeting);
 				}
 				
 				

@@ -49,6 +49,8 @@ public interface IUserService {
 			String msgText);
 	@Transactional
 	public void sendNearToYouNotification(Message msg);
+	@Transactional
+	public List<User> getTopList();
 	
 	
 	

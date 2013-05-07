@@ -15,6 +15,9 @@
  */
 package at.ac.tuwien.server.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import at.ac.tuwien.server.domain.User;
 import at.ac.tuwien.server.domain.dtos.StatisticsDTO;
+import at.ac.tuwien.server.domain.dtos.UserDTO;
+import at.ac.tuwien.server.domain.dtos.UserListDTO;
 import at.ac.tuwien.server.service.interfaces.IUserService;
 
 @Controller
@@ -57,6 +62,32 @@ public class StatisticsController {
 		StatisticsDTO stats = userService.getStatisticsForUser(u);
 		return stats;
 	}
+	
+	@RequestMapping(value="toplist", method=RequestMethod.POST, headers="Accept=application/xml")
+	public @ResponseBody UserListDTO retrieveTopList(@RequestBody LinkedMultiValueMap<String, String> credentials) {
+		
+		return this.mapUserList(userService.getTopList());
+				
+	}
+
+	private UserListDTO mapUserList(List<User> userList) {
+		List<UserDTO> dtos = new ArrayList<UserDTO>();
+		for(User u : userList){
+			UserDTO dto = new UserDTO();
+			dto.setEmail(u.getEmail());
+			dto.setId(u.getId());
+			dto.setLast_activity_date(u.getLast_activity_date().getTime());
+			dto.setNumOfFriends(u.getFirends().size());
+			dto.setRegister_date(u.getRegister_date().getTime());
+			dto.setScore(u.getScore());
+			dto.setUsername(u.getUsername());
+			
+			dtos.add(dto);
+		}
+		UserListDTO liste = new UserListDTO(dtos);
+		return liste;
+	}
+	
 
 	
 }
