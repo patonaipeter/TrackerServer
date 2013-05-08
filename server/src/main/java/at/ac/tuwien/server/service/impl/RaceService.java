@@ -54,7 +54,8 @@ public class RaceService implements IRaceService {
 			}
 		}
 		// km/h
-		Double avgSpeed = new Double(sumDistance/(sumTime/(1000*60*60)));
+		Double temp = new Double(sumTime)/new Double(1000*60*60);
+		Double avgSpeed = new Double(sumDistance/temp);
 		return avgSpeed;
 	}
 
