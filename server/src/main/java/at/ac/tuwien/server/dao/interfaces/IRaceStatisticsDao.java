@@ -19,5 +19,8 @@ public interface IRaceStatisticsDao {
 	@Transactional
 	public RaceStatistics retrieveRaceStatisticsForRaceAndUser(Race race,
 			User user);
+
+	@Transactional
+	public List<RaceStatistics> getUserRaceStats(User u);
 	
 }

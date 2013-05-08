@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import at.ac.tuwien.server.Constants;
 import at.ac.tuwien.server.dao.interfaces.IRaceDao;
+import at.ac.tuwien.server.dao.interfaces.IRaceStatisticsDao;
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Race;
+import at.ac.tuwien.server.domain.RaceStatistics;
 import at.ac.tuwien.server.domain.User;
 import at.ac.tuwien.server.service.stats.StatisticsHelper;
 
@@ -20,6 +22,10 @@ public class RaceDaoImpl implements IRaceDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	private IRaceStatisticsDao statDao;
+	
 	@Override
 	@Transactional
 	public void saveRace(Race race) {
@@ -44,7 +50,12 @@ public class RaceDaoImpl implements IRaceDao {
 	@Override
 	@Transactional
 	public Double getDistanceInRaces(User u) {
-		return StatisticsHelper.getDistanceInRaces(u.getRaces());
+		List<RaceStatistics> liste = statDao.getUserRaceStats(u);
+		double summe = 0;
+		for(RaceStatistics r : liste){
+			summe +=r.getDistance();
+		}
+		return summe;
 	}
 	@Override
 	@Transactional

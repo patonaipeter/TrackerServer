@@ -54,5 +54,14 @@ public class RaceStatisticsDaoImpl implements IRaceStatisticsDao {
 
 	}
 
+	@Override
+	@Transactional
+	public List<RaceStatistics> getUserRaceStats(User u) {
+		Query q = sessionFactory.getCurrentSession().createQuery("select r from RaceStatistics r where r.user.id =:userid");
+		q.setParameter("userid", u.getId());
+		
+		return (List<RaceStatistics> ) q.list();
+	}
+
 	
 }

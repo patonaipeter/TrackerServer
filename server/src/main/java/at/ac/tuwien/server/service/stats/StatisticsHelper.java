@@ -6,6 +6,7 @@ import java.util.Set;
 import at.ac.tuwien.server.Constants;
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.Race;
+import at.ac.tuwien.server.domain.User;
 
 
 public class StatisticsHelper {
@@ -98,17 +99,7 @@ public class StatisticsHelper {
 	    return d;
 	}
 
-	public static Double getDistanceInRaces(Set<Race> races) {
-		Double sum = new Double(0);
-		
-		for(Race r : races){
-			if(!r.getRaceName().equals(Constants.defaultRace))
-			sum += r.getDistance();
-		}
-		
-		return sum;
-		
-	}
+	
 
 	public static double calculateDistanceBetweenListOfPoints(List<Location> raceLocations) {
 		
