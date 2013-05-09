@@ -1,14 +1,14 @@
 package at.ac.tuwien.server.test.db.statistics;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.LinkedMultiValueMap;
 
-import at.ac.tuwien.server.controller.StatisticsController;
 import at.ac.tuwien.server.domain.User;
 import at.ac.tuwien.server.domain.dtos.StatisticsDTO;
 import at.ac.tuwien.server.service.impl.UserService;
@@ -29,6 +29,13 @@ public class StatTest {
 		
 		System.out.println(stats.getName());
 		
+	}
+	
+	@Test
+	@Transactional
+	public void StatTest2(){
+		List<User> uList = userService.getTopList();
+		System.out.println(uList.size()+"");
 	}
 	
 }

@@ -64,7 +64,8 @@ public class StatisticsController {
 	}
 	
 	@RequestMapping(value="toplist", method=RequestMethod.POST, headers="Accept=application/xml")
-	public @ResponseBody UserListDTO retrieveTopList(@RequestBody LinkedMultiValueMap<String, String> credentials) {
+	@Transactional
+	public @ResponseBody UserListDTO retrieveTopList() {
 		
 		return this.mapUserList(userService.getTopList());
 				
