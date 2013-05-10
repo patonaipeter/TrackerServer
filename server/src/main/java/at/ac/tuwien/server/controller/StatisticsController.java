@@ -98,7 +98,7 @@ public class StatisticsController {
 	 */
 	@RequestMapping(value="heatmap", method=RequestMethod.POST, headers="Accept=application/xml")
 	@Transactional
-	public @ResponseBody List<Double> retrieveHeatPoints(@RequestBody LinkedMultiValueMap<String, String> credentials) {
+	public @ResponseBody String retrieveHeatPoints(@RequestBody LinkedMultiValueMap<String, String> credentials) {
 		
 		String username = credentials.getFirst("username");
 		String pass = credentials.getFirst("password");
@@ -113,12 +113,13 @@ public class StatisticsController {
 		return this.mapLocations(locList);
 	}
 
-	private List<Double> mapLocations(List<Location> locList) {
-		List<Double> returnList = new ArrayList<Double>();
+	private String mapLocations(List<Location> locList) {
+		String returnList = "";
 		for(Location l : locList){
-			returnList.add(l.getLatitude());
-			returnList.add(l.getLongitude());
+			returnList += l.getLatitude().toString() +",";
+			returnList += l.getLongitude().toString() +",";
 		}
+		returnList = returnList.substring(returnList.length()-1);
 		return returnList;
 	}
 	
