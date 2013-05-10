@@ -116,10 +116,10 @@ public class StatisticsController {
 	private String mapLocations(List<Location> locList) {
 		String returnList = "";
 		for(Location l : locList){
-			returnList += l.getLatitude().toString() +",";
-			returnList += l.getLongitude().toString() +",";
+			returnList += l.getLatitude().toString() +";";
+			returnList += l.getLongitude().toString() +";";
 		}
-		returnList = returnList.substring(returnList.length()-1);
+		returnList = returnList.substring(0,returnList.length()-1);
 		return returnList;
 	}
 	
