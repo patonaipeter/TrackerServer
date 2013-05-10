@@ -31,6 +31,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.User;
+import at.ac.tuwien.server.domain.dtos.LocationDTO;
+import at.ac.tuwien.server.domain.dtos.LocationListDTO;
 import at.ac.tuwien.server.domain.dtos.StatisticsDTO;
 import at.ac.tuwien.server.domain.dtos.UserDTO;
 import at.ac.tuwien.server.domain.dtos.UserListDTO;
@@ -98,7 +100,7 @@ public class StatisticsController {
 	 */
 	@RequestMapping(value="heatmap", method=RequestMethod.POST, headers="Accept=application/xml")
 	@Transactional
-	public @ResponseBody String retrieveHeatPoints(@RequestBody LinkedMultiValueMap<String, String> credentials) {
+	public @ResponseBody LocationListDTO retrieveHeatPoints(@RequestBody LinkedMultiValueMap<String, String> credentials) {
 		
 		String username = credentials.getFirst("username");
 		String pass = credentials.getFirst("password");
@@ -109,8 +111,19 @@ public class StatisticsController {
 		if(u == null) return null;
 		
 		List<Location> locList = locationService.getUserLocations(u);
-		
-		return this.mapLocations(locList);
+		LocationListDTO locListDTO = new LocationListDTO();
+		List<LocationDTO> dtos = new ArrayList<LocationDTO>();
+		for(Location l : locList){
+			LocationDTO dto = new LocationDTO();
+			dto.setAltitude(l.getAltitude());
+//			dto.setDate(l.getTimestamp().getTime());
+//			dto.setId(l.getId());
+			dto.setLatitude(l.getLatitude());
+			dto.setLongitude(l.getLongitude());
+			dtos.add(dto);
+		}
+		locListDTO.setLocationList(dtos);
+		return locListDTO;
 	}
 
 	private String mapLocations(List<Location> locList) {
