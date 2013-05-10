@@ -29,10 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import at.ac.tuwien.server.domain.Location;
 import at.ac.tuwien.server.domain.User;
 import at.ac.tuwien.server.domain.dtos.StatisticsDTO;
 import at.ac.tuwien.server.domain.dtos.UserDTO;
 import at.ac.tuwien.server.domain.dtos.UserListDTO;
+import at.ac.tuwien.server.service.interfaces.ILocationService;
 import at.ac.tuwien.server.service.interfaces.IUserService;
 
 @Controller
@@ -42,6 +44,8 @@ public class StatisticsController {
 	private static final Logger logger = LoggerFactory.getLogger(StatisticsController.class);
 	@Autowired
 	IUserService userService;
+	@Autowired
+	ILocationService locationService;
 	
 	@Transactional
 	@RequestMapping(value="statistics", method=RequestMethod.POST, headers="Accept=application/xml")
@@ -87,6 +91,35 @@ public class StatisticsController {
 		}
 		UserListDTO liste = new UserListDTO(dtos);
 		return liste;
+	}
+	
+	/**
+	 *  Return List of Double with alwas first Latitude second Longitude elements
+	 */
+	@RequestMapping(value="heatmap", method=RequestMethod.POST, headers="Accept=application/xml")
+	@Transactional
+	public @ResponseBody List<Double> retrieveHeatPoints(@RequestBody LinkedMultiValueMap<String, String> credentials) {
+		
+		String username = credentials.getFirst("username");
+		String pass = credentials.getFirst("password");
+
+		User u = userService.getUser(username, pass);
+		
+		//TODO Login Failed -> message to client
+		if(u == null) return null;
+		
+		List<Location> locList = locationService.getUserLocations(u);
+		
+		return this.mapLocations(locList);
+	}
+
+	private List<Double> mapLocations(List<Location> locList) {
+		List<Double> returnList = new ArrayList<Double>();
+		for(Location l : locList){
+			returnList.add(l.getLatitude());
+			returnList.add(l.getLongitude());
+		}
+		return returnList;
 	}
 	
 

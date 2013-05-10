@@ -129,5 +129,14 @@ public class LocationDaoImpl implements ILocationDao {
 		}
 			
 	}
+	@Override
+	@Transactional
+	public List<Location> getUserLocation(User u) {
+		Query q = sessionFactory.getCurrentSession().createQuery("select loc from Location loc where loc.user.id = :userid");
+		q.setParameter("userid", u.getId());
+		
+		return (List<Location>) q.list();
+		
+	}
 
 }

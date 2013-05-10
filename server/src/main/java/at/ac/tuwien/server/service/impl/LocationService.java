@@ -123,4 +123,10 @@ public class LocationService implements ILocationService {
 		
 	}
 
+	@Override
+	@Transactional
+	public List<Location> getUserLocations(User u) {
+		return locationDao.getUserLocation(u);
+	}
+
 }

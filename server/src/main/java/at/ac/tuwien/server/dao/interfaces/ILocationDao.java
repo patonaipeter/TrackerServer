@@ -39,4 +39,7 @@ public interface ILocationDao {
 	@Transactional
 	public Location getUserLocationForDate(User u, Long time);
 		
+	
+	@Transactional
+	public List<Location> getUserLocation(User u);
 }
