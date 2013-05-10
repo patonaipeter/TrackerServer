@@ -132,9 +132,9 @@ public class LocationDaoImpl implements ILocationDao {
 	@Override
 	@Transactional
 	public List<Location> getUserLocation(User u) {
-		Query q = sessionFactory.getCurrentSession().createQuery("select loc from Location loc where loc.user.id = :userid");
+		Query q = sessionFactory.getCurrentSession().createQuery("select loc from Location loc where loc.user.id = :userid ORDER BY loc.timestamp DESC");
 		q.setParameter("userid", u.getId());
-		
+		q.setMaxResults(100);
 		return (List<Location>) q.list();
 		
 	}
